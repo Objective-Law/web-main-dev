@@ -1,0 +1,127 @@
+{% assign locale = include.locale | default: site.locale %}
+{% assign hero = page.header %}
+{% assign overlay_images = hero.overlay_images %}
+{% capture auto_overlay_image %}{% include oli/resolve-page-image.html page=page bucket="overlay" %}{% endcapture %}
+{% assign auto_overlay_image = auto_overlay_image | strip %}
+{% assign overlay_title = hero.overlay_title | default: page.title | default: site.title %}
+{% assign overlay_title_width = hero.overlay_title_width | default: "100%" %}
+{% assign mobile_overlay_title_width = hero.mobile_overlay_title_width | default: overlay_title_width %}
+{% assign overlay_image_focal_point = hero.overlay_image_focal_point | default: "50% 50%" %}
+{% assign overlay_image_anchor_point = hero.overlay_image_anchor_point | default: "50% 50%" %}
+{% assign overlay_image_count = 0 %}
+{% assign has_carousel = false %}
+
+{% if overlay_images and overlay_images.size > 0 %}
+  {% assign overlay_image_count = overlay_images.size %}
+{% elsif hero.overlay_image %}
+  {% assign overlay_image_count = 1 %}
+{% elsif auto_overlay_image != "" %}
+  {% assign overlay_image_count = 1 %}
+{% endif %}
+{% if overlay_image_count > 1 %}
+  {% assign has_carousel = true %}
+{% endif %}
+
+{% capture overlay_filter_css %}
+  {% if hero.overlay_filter %}
+    {% assign overlay_filter_string = hero.overlay_filter | strip %}
+    {% if overlay_filter_string contains "gradient(" or overlay_filter_string contains "rgb(" or overlay_filter_string contains "rgba(" or overlay_filter_string contains "#" or overlay_filter_string contains "var(" %}
+      {{ overlay_filter_string }}
+    {% else %}
+      rgba(0, 0, 0, {{ overlay_filter_string }})
+    {% endif %}
+  {% else %}
+    transparent
+  {% endif %}
+{% endcapture %}
+
+{% assign is_resource_page = false %}
+{% if page.collection == "resources" %}
+  {% assign is_resource_page = true %}
+{% endif %}
+
+{% if hero.overlay_color or overlay_image_count > 0 %}
+  <div
+    class="page__hero--overlay oli-overlay {% if has_carousel %}oli-overlay-carousel{% else %}oli-overlay-hero{% endif %}{% if is_resource_page %} oli-overlay--resource{% endif %}"
+    {% if overlay_image_count > 0 %}data-oli-overlay{% endif %}
+    {% if has_carousel %}data-oli-overlay-carousel data-oli-overlay-interval="{{ hero.overlay_interval | default: 4200 }}"{% endif %}
+    style="--oli-overlay-base-color: {{ hero.overlay_color | default: '#111111' }}; --oli-overlay-filter: {{ overlay_filter_css | strip }}; --oli-overlay-title-width: {{ overlay_title_width }}; --oli-overlay-title-mobile-width: {{ mobile_overlay_title_width }};"
+  >
+    {% if overlay_image_count > 0 %}
+      <div class="oli-overlay-viewport" aria-hidden="true">
+        {% if overlay_images and overlay_images.size > 0 %}
+          {% for slide in overlay_images %}
+            {% assign slide_focal_point = slide.focal_point | default: overlay_image_focal_point %}
+            {% assign slide_anchor_point = slide.anchor_point | default: overlay_image_anchor_point %}
+            <div
+              class="oli-overlay-slide{% if forloop.first %} is-active{% endif %}"
+              data-oli-overlay-slide
+              data-oli-overlay-image="{{ slide.image | relative_url }}"
+              data-focal-point="{{ slide_focal_point }}"
+              data-anchor-point="{{ slide_anchor_point }}"
+              style="background-image: url('{{ slide.image | relative_url }}');"
+              {% unless forloop.first %}aria-hidden="true"{% endunless %}
+            ></div>
+          {% endfor %}
+        {% else %}
+          {% assign resolved_overlay_image = hero.overlay_image | default: auto_overlay_image %}
+          <div
+            class="oli-overlay-slide is-active"
+            data-oli-overlay-slide
+            data-oli-overlay-image="{{ resolved_overlay_image | relative_url }}"
+            data-focal-point="{{ overlay_image_focal_point }}"
+            data-anchor-point="{{ overlay_image_anchor_point }}"
+            style="background-image: url('{{ resolved_overlay_image | relative_url }}');"
+          ></div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="wrapper">
+      {% if hero.kicker %}
+        <p class="oli-kicker">{{ hero.kicker }}</p>
+      {% endif %}
+      {% if overlay_title %}
+        <h1 id="page-title" class="page__title" itemprop="headline">
+          {{ overlay_title | markdownify | remove: "<p>" | remove: "</p>" }}
+        </h1>
+      {% endif %}
+      {% if page.tagline %}
+        <p class="page__lead">{{ page.tagline | markdownify | remove: "<p>" | remove: "</p>" }}</p>
+      {% elsif hero.show_overlay_excerpt != false and page.excerpt %}
+        <p class="page__lead">{{ page.excerpt | markdownify | remove: "<p>" | remove: "</p>" }}</p>
+      {% endif %}
+      {% if is_resource_page %}
+        <div class="oli-resource-page__status-row">
+          {% include oli/publication-status-badge.html document=page variant="overlay" %}
+        </div>
+        {% include oli/resource-meta.html document=page content=content variant="overlay" %}
+        {% if page.share %}{% include social-share.html locale=locale variant="hero" %}{% endif %}
+      {% else %}
+        {% include page__meta.html locale=locale %}
+      {% endif %}
+      {% if hero.actions %}
+        <div class="page__hero-actions">
+          {% for action in hero.actions %}
+            {% assign action_url = action.url | default: action.link %}
+            {% if action_url %}
+              {% assign action_class = action.class | default: "oli-button oli-button--overlay" %}
+              <a href="{{ action_url | relative_url }}" class="{{ action_class }}">{{ action.label | default: action.title | default: "Learn More" }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if hero.caption %}
+      <span class="page__hero-caption">{{ hero.caption | markdownify | remove: "<p>" | remove: "</p>" }}</span>
+    {% endif %}
+  </div>
+{% elsif hero.image %}
+  <div class="page__hero">
+    <img src="{{ hero.image | relative_url }}" alt="{{ hero.image_description | default: page.title | strip_html | escape }}" class="page__hero-image">
+    {% if hero.caption %}
+      <span class="page__hero-caption">{{ hero.caption | markdownify | remove: "<p>" | remove: "</p>" }}</span>
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,0 +1,19 @@
+{%- assign kind = include.kind | default: "note" -%}
+{%- assign trigger_html = include.trigger_html | default: include.text | default: "note" | strip -%}
+{%- assign label = include.aria_label | default: include.heading | default: trigger_html -%}
+{%- capture annotation_attrs -%}
+ class="oli-annotation oli-annotation--{{ kind }}"
+ data-oli-annotation
+ data-annotation-kind="{{ kind }}"
+{% if include.entry_id %} data-entry-id="{{ include.entry_id | escape }}"{% endif %}
+{% if include.source_id %} data-source-id="{{ include.source_id | escape }}"{% endif %}
+{% if include.citation_label %} data-citation-label="{{ include.citation_label | escape }}"{% endif %}
+ role="button"
+ tabindex="0"
+ aria-haspopup="dialog"
+ aria-expanded="false"
+ aria-label="{{ label | strip_html | strip_newlines | replace: '  ', ' ' | strip | escape }}"
+{%- endcapture -%}
+{%- assign annotation_attrs = annotation_attrs | strip_newlines | replace: '  ', ' ' | strip -%}
+{%- capture annotation_output -%}<span {{ annotation_attrs }}>{{ trigger_html }}</span>{%- endcapture -%}
+{{- annotation_output -}}

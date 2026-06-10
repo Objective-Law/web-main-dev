@@ -1,0 +1,35 @@
+{%- assign item = include.item -%}
+{%- assign item_type = item.type | default: item.resource_type | default: "article" -%}
+{%- assign item_description = item.description | default: item.excerpt | default: item.content | strip_html | truncatewords: 32 -%}
+{%- assign item_thumbnail = item.thumbnail | default: item.image | default: item.header.image | default: item.header.overlay_image -%}
+{%- assign title_level = include.title_level | default: 2 -%}
+<a class="oli-resource-card" href="{{ item.url | relative_url }}" data-oli-resource-card data-resource-type="{{ item_type }}" data-resource-title="{{ item.title | escape }}" data-resource-tags="{{ item.tags | join: '|' }}">
+  <div class="oli-resource-card__meta">
+    <p class="oli-resource-card__eyebrow">{{ item_type | replace: "-", " " | capitalize }}</p>
+    {% include oli/publication-status-badge.html document=item variant="card" %}
+    {% if item_thumbnail %}
+      <span class="oli-resource-card__thumbnail" aria-hidden="true">
+        <img src="{{ item_thumbnail | relative_url }}" alt="" loading="lazy" decoding="async">
+      </span>
+    {% endif %}
+    <ul class="oli-resource-card__meta-list" role="list">
+      {% if item.date %}
+        <li class="oli-resource-card__meta-item" title="Date">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: site.date_format }}</time>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+  <div class="oli-resource-card__body">
+    <h{{ title_level }} class="oli-resource-card__title">{{ item.title }}</h{{ title_level }}>
+    <p class="oli-resource-card__summary">{{ item_description }}</p>
+    {% if item.tags and item.tags.size > 0 %}
+      <div class="oli-taxonomy-pills">
+        {% for tag in item.tags %}
+          <span class="oli-taxonomy-pill">{{ tag | replace: "-", " " }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</a>

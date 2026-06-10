@@ -1,0 +1,14 @@
+decided:
+  label: "Decided"
+  heading: "Decided case"
+  text: "This case has already been decided. OLI did not participate in it; this page explains the kind of objective-law analysis OLI could have contributed and why similar cases remain important."
+
+active:
+  label: "Active"
+  heading: "Active case or controversy"
+  text: "This matter is currently before a court or otherwise remains legally active. The page explains why the issue fits OLI's mission and why timely research, analysis, and briefing capacity matter."
+
+potential:
+  label: "Potential"
+  heading: "Potential vehicle"
+  text: "This matter presents a possible vehicle for future legal development on an issue central to OLI's mission. The page explains why the underlying legal question is worth attention even if the procedural posture may change."

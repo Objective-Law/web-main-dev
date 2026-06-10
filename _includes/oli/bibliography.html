@@ -1,0 +1,39 @@
+{% assign bibliography_title = include.title | default: "References" %}
+
+{% if page.citations %}
+  <aside class="oli-bibliography" data-oli-bibliography role="doc-endnotes" aria-label="{{ bibliography_title | escape }}" data-bibliography-title="{{ bibliography_title | escape }}">
+    <ol class="oli-bibliography__list">
+      {% if page.citations.first and page.citations.first.label %}
+        {% for citation_entry in page.citations %}
+          {% assign source = site.data.references[citation_entry.id] %}
+          <li class="oli-bibliography__item" id="reference-{{ citation_entry.label | slugify }}">
+            <span class="oli-bibliography__label">{{ citation_entry.label }}</span>
+            <span class="oli-bibliography__content">
+              {% if source %}
+                {% include oli/reference-citation.html source=source %}
+              {% else %}
+                <span class="oli-bibliography__missing">Missing reference source: {{ citation_entry.id }}</span>
+              {% endif %}
+            </span>
+          </li>
+        {% endfor %}
+      {% else %}
+        {% for citation_pair in page.citations %}
+          {% assign label = citation_pair[0] %}
+          {% assign source_id = citation_pair[1] %}
+          {% assign source = site.data.references[source_id] %}
+          <li class="oli-bibliography__item" id="reference-{{ label | slugify }}">
+            <span class="oli-bibliography__label">{{ label }}</span>
+            <span class="oli-bibliography__content">
+              {% if source %}
+                {% include oli/reference-citation.html source=source %}
+              {% else %}
+                <span class="oli-bibliography__missing">Missing reference source: {{ source_id }}</span>
+              {% endif %}
+            </span>
+          </li>
+        {% endfor %}
+      {% endif %}
+    </ol>
+  </aside>
+{% endif %}

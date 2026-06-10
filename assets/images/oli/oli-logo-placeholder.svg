@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-labelledby="title desc">
+  <title id="title">Objective Law Initiative placeholder logo</title>
+  <desc id="desc">A placeholder mark with balanced scales and classical columns for the Objective Law Initiative.</desc>
+  <rect width="640" height="160" fill="#111111"/>
+  <g fill="none" stroke="#d8c184" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M82 130h112"/>
+    <path d="M103 130V58"/>
+    <path d="M173 130V58"/>
+    <path d="M90 58h96"/>
+    <path d="M138 38v92"/>
+    <path d="M91 78h94"/>
+    <path d="M107 78l-28 34h56l-28-34Z"/>
+    <path d="M169 78l-28 34h56l-28-34Z"/>
+    <path d="M118 38h40"/>
+  </g>
+  <text x="230" y="72" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700">Objective Law</text>
+  <text x="230" y="112" fill="#d8c184" font-family="Arial, sans-serif" font-size="20" letter-spacing="2">INITIATIVE</text>
+</svg>

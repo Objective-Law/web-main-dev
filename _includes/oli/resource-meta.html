@@ -1,0 +1,18 @@
+{% assign document = include.document | default: page %}
+{% assign body_content = include.content | default: content %}
+{% assign resource_author = document.author | default: document.authors[0] | default: site.author.name | default: site.author %}
+{% assign resource_updated = document.last_modified_at | default: document.last_updated_at %}
+{% assign resource_word_count = body_content | strip_html | number_of_words %}
+{% assign resource_read_minutes = resource_word_count | plus: 199 | divided_by: 200 %}
+{% if resource_read_minutes < 1 %}
+  {% assign resource_read_minutes = 1 %}
+{% endif %}
+
+<ul class="oli-resource-page__meta{% if include.variant %} oli-resource-page__meta--{{ include.variant }}{% endif %}" role="list">
+  {% if resource_author %}<li><i class="fas fa-user" aria-hidden="true"></i><span>{{ resource_author }}</span></li>{% endif %}
+  {% if document.date %}
+    <li title="{% if document.placeholder %}Scaffold date{% else %}Published date{% endif %}"><i class="far fa-calendar-alt" aria-hidden="true"></i><time datetime="{{ document.date | date_to_xmlschema }}">{{ document.date | date: site.date_format }}</time></li>
+  {% endif %}
+  {% if resource_updated %}<li title="Updated date"><i class="fas fa-history" aria-hidden="true"></i><time datetime="{{ resource_updated | date_to_xmlschema }}">{{ resource_updated | date: site.date_format }}</time></li>{% endif %}
+  {% if document.read_time %}<li><i class="far fa-clock" aria-hidden="true"></i><span>{{ resource_read_minutes }} min read</span></li>{% endif %}
+</ul>

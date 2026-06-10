@@ -1,0 +1,22 @@
+<!-- start custom footer snippets -->
+
+<div class="oli-footer-band">
+  <p class="oli-footer-band__status">{{ site.data.site_status.tax_status.notice }}</p>
+  <p class="oli-footer-band__credit">Website by Altus Tech Services</p>
+</div>
+
+<div id="oli-annotation-layer" data-oli-annotation-layer></div>
+<script>
+  window.OLI_ANNOTATIONS = window.OLI_ANNOTATIONS || {};
+  window.OLI_ANNOTATIONS.glossary = {{ site.data.glossary | jsonify }};
+  window.OLI_ANNOTATIONS.references = {{ site.data.references | jsonify }};
+  window.OLI_ANNOTATIONS.pageCitations = {{ page.citations | jsonify }};
+</script>
+<script src="{{ '/assets/js/oli/hero-carousel.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/oli/annotations.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/oli/resource-filters.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/oli/share.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/oli/toc-widget.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/oli/visual-media.js' | relative_url }}"></script>
+
+<!-- end custom footer snippets -->

@@ -1,0 +1,19 @@
+{% assign document = include.document | default: page %}
+{% assign listing_path = "/resources/" | relative_url %}
+{% assign has_taxonomy = false %}
+{% if document.tags and document.tags.size > 0 %}
+  {% assign has_taxonomy = true %}
+{% endif %}
+
+{% if has_taxonomy %}
+  <div class="oli-resource-taxonomy">
+    <div class="oli-resource-taxonomy__group">
+      <span class="oli-resource-taxonomy__label">Tags</span>
+      <div class="oli-taxonomy-pills">
+        {% for tag in document.tags %}
+          <a class="oli-taxonomy-pill" href="{{ listing_path }}?tag={{ tag }}">{{ tag | replace: "-", " " }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

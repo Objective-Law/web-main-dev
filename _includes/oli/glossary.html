@@ -1,0 +1,9 @@
+{%- assign entry = site.data.glossary[include.id] -%}
+{%- assign trigger_text = include.text | default: entry.term | default: include.id -%}
+{%- if entry -%}
+  {%- capture trigger_html -%}<span class="oli-annotation__trigger-text">{{ trigger_text }}</span>{%- endcapture -%}
+  {%- capture aria_label -%}Show glossary note for {{ trigger_text }}{%- endcapture -%}
+  {%- include oli/annotation.html kind="glossary" trigger_html=trigger_html entry_id=include.id heading=entry.term aria_label=aria_label -%}
+{%- else -%}
+<span class="oli-annotation oli-annotation-missing" title="Missing glossary entry: {{ include.id }}">{{ trigger_text }}</span>
+{%- endif -%}

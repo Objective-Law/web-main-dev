@@ -1,0 +1,19 @@
+objective-law:
+  term: "Objective law"
+  short: "Law that gives citizens intelligible guidance and binds officials to principled limits."
+  long: "In OLI's usage, objective law means legal standards that can be stated, known, applied, and reviewed without leaving citizens at the mercy of political pressure, shifting institutional preferences, or personal discretion."
+  see_also:
+    - individual-rights
+    - limited-government
+individual-rights:
+  term: "Individual rights"
+  short: "Moral-political principles that define and protect each person's freedom of action in a social context."
+  long: "OLI treats individual rights as real limits on government power, not as interests to be balanced away whenever officials assert a sufficiently attractive public purpose."
+limited-government:
+  term: "Limited government"
+  short: "A constitutional order in which political power is confined to the protection of rights."
+  long: "Limited government requires more than formal structure. It requires enforceable limits, objective standards, and courts willing to treat constitutional constraints as constraints."
+judicial-deference:
+  term: "Judicial deference"
+  short: "A posture in which courts give government actors broad latitude instead of independently enforcing constitutional limits."
+  long: "Some deference doctrines can leave rights underprotected by asking courts to accept vague legislative or administrative justifications instead of testing whether government action is objectively limited by law."

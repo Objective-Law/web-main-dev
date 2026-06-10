@@ -1,0 +1,9 @@
+{% assign issue_status_key = page.status | default: "" %}
+{% assign issue_status = site.data.issue_statuses[issue_status_key] %}
+{% if issue_status %}
+  <aside class="oli-issue-status" aria-label="Issue status">
+    <p class="oli-issue-status__label">{{ issue_status.label }}</p>
+    <h2 class="oli-issue-status__heading">{{ issue_status.heading }}</h2>
+    <p>{{ issue_status.text }}</p>
+  </aside>
+{% endif %}

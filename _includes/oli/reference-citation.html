@@ -1,0 +1,7 @@
+{% assign source = include.source %}
+{% if source %}
+  <span class="oli-citation-ref">
+    {% if source.author %}<span class="oli-citation-ref__author">{{ source.author }}</span>{% endif %}{% if source.year %} <span class="oli-citation-ref__year">({{ source.year }})</span>{% endif %}{% if source.author or source.year %}. {% endif %}
+    <span class="oli-citation-ref__title">{{ source.title }}</span>{% if source.source %}. <span class="oli-citation-ref__source">{{ source.source }}</span>{% endif %}{% if source.url %}. <a href="{{ source.url }}" target="_blank" rel="noopener">Source</a>{% endif %}
+  </span>
+{% endif %}

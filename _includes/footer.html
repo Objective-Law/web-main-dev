@@ -1,0 +1,28 @@
+{% assign locale = include.locale | default: site.locale %}
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    {% comment %}{% if site.data.ui-text[locale].follow_label %}
+      <li><strong>{{ site.data.ui-text[locale].follow_label }}</strong></li>
+    {% endif %}{% endcomment %}
+    {% assign social_links = "youtube,twitter,facebook,linkedin,instagram" | split: "," %}
+    {% for social_key in social_links %}
+      {% assign link = site.data.social[social_key] %}
+        {% if link.label and link.url %}
+          <li><a href="{{ link.url }}" rel="nofollow noopener noreferrer{% if link.rel %} {{ link.rel }}{% endif %}"><i class="{{ link.icon | default: 'fas fa-link' }}" aria-hidden="true"></i> {{ link.label | escape_once | strip }}</a></li>
+        {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+
+<nav class="oli-footer-legal" aria-label="Legal links">
+  <a href="/terms/">Terms of Service</a>
+  <a href="/privacy/">Privacy Policy</a>
+  <a href="/cookie-policy/">Cookie Policy</a>
+  <a href="/data-deletion/">Data Deletion</a>
+</nav>
+
+<div class="page__footer-copyright">
+  &copy; {% assign site_time = site.time | date: '%Y' %}{% if site.footer.since and site_time != site.footer.since %}{{ site.footer.since }} - {% endif %}{{ site_time }}
+  <a href="{{ site.copyright_url | default: site.url }}">{{ site.copyright | default: site.title | escape_once | strip }}</a>.
+  Contact <a href="mailto:info@objectivelaw.org">info@objectivelaw.org</a>.
+</div>

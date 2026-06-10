@@ -1,0 +1,31 @@
+{%- assign include_label = include.label | default: include.n -%}
+{%- assign source_id = include.id -%}
+{%- if source_id == blank and include_label != blank and page.citations -%}
+  {%- if page.citations.first and page.citations.first.label -%}
+    {%- for citation_entry in page.citations -%}
+      {%- assign entry_label = citation_entry.label | append: "" -%}
+      {%- assign wanted_label = include_label | append: "" -%}
+      {%- if entry_label == wanted_label -%}
+        {%- assign source_id = citation_entry.id -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- for citation_pair in page.citations -%}
+      {%- assign pair_label = citation_pair[0] | append: "" -%}
+      {%- assign wanted_label = include_label | append: "" -%}
+      {%- if pair_label == wanted_label -%}
+        {%- assign source_id = citation_pair[1] -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endif -%}
+{%- assign source = site.data.references[source_id] -%}
+{%- if source or source_id != blank or include_label != blank -%}
+  {%- capture trigger_html -%}<span class="oli-citation-marker" aria-hidden="true">{% if include.text %}{{ include.text }}{% elsif include_label %}{{ include_label }}{% else %}citation{% endif %}</span>{%- endcapture -%}
+  {%- capture aria_label -%}Show citation{% if include_label %} {{ include_label }}{% endif %}{%- endcapture -%}
+  {%- include oli/annotation.html kind="citation" trigger_html=trigger_html source_id=source_id citation_label=include_label heading=source.title aria_label=aria_label -%}
+{%- else -%}
+<span class="oli-annotation oli-annotation-missing">[citation]</span>
+{%- endif -%}

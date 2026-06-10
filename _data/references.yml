@@ -1,0 +1,21 @@
+federalist-51:
+  title: "The Federalist No. 51"
+  author: "James Madison"
+  year: "1788"
+  source: "Founders Online, National Archives"
+  url: "https://founders.archives.gov/documents/Madison/01-10-02-0178"
+  summary: "Madison's discussion of constitutional structure and the need to control government power."
+douglass-constitution:
+  title: "The Constitution of the United States: Is It Pro-Slavery or Anti-Slavery?"
+  author: "Frederick Douglass"
+  year: "1860"
+  source: "Teaching American History"
+  url: "https://teachingamericanhistory.org/document/the-constitution-of-the-united-states-is-it-pro-slavery-or-anti-slavery/"
+  summary: "Douglass's liberty-protecting interpretation of the Constitution."
+constitution:
+  title: "Constitution of the United States"
+  author: "United States"
+  year: "1787"
+  source: "National Archives"
+  url: "https://www.archives.gov/founding-docs/constitution-transcript"
+  summary: "The constitutional text establishing a federal government of enumerated powers and later amended to protect individual rights more explicitly."

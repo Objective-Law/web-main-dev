@@ -1,0 +1,36 @@
+{% if page.views and page.views.size > 0 %}
+  <div class="oli-visual-media" data-oli-visual-media>
+    <div class="oli-visual-media__tabs" role="tablist" aria-label="Visual media views">
+      {% for view in page.views %}
+        {% assign tab_id = "oli-visual-tab-" | append: forloop.index %}
+        {% assign panel_id = "oli-visual-panel-" | append: forloop.index %}
+        <button
+          class="oli-visual-media__tab"
+          id="{{ tab_id }}"
+          type="button"
+          role="tab"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-controls="{{ panel_id }}"
+          data-oli-visual-tab
+        >{{ view.label | default: view.platform | default: "View" }}</button>
+      {% endfor %}
+    </div>
+
+    {% for view in page.views %}
+      {% assign tab_id = "oli-visual-tab-" | append: forloop.index %}
+      {% assign panel_id = "oli-visual-panel-" | append: forloop.index %}
+      <section
+        class="oli-visual-media__panel"
+        id="{{ panel_id }}"
+        role="tabpanel"
+        aria-labelledby="{{ tab_id }}"
+        {% unless forloop.first %}hidden{% endunless %}
+        data-oli-visual-panel
+      >
+        {% include oli/visual-media-view.html view=view %}
+      </section>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="notice--info">Visual media views will appear here when OLI publishes them.</div>
+{% endif %}

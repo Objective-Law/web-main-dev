@@ -1,0 +1,20 @@
+youtube:
+  label: "YouTube"
+  url: "https://www.youtube.com/@ObjectiveLawInitiative"
+  icon: "fab fa-youtube"
+twitter:
+  label: "Twitter"
+  url: "https://x.com/ObjectiveLawOLI"
+  icon: "fab fa-twitter"
+facebook:
+  label: "Facebook"
+  url: "https://www.facebook.com/ObjectiveLaw/"
+  icon: "fab fa-facebook"
+linkedin:
+  label: "LinkedIn"
+  url: "https://www.linkedin.com/company/objective-law/"
+  icon: "fab fa-linkedin"
+instagram:
+  label: "Instagram"
+  url: "https://www.instagram.com/objectivelawinitiative"
+  icon: "fab fa-instagram"

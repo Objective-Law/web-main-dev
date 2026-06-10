@@ -1,0 +1,16 @@
+{% assign document = include.document | default: page %}
+{% assign status = document.publication_status.status | default: document.publication_status %}
+{% if status == nil and document.placeholder %}
+  {% assign status = "placeholder" %}
+{% endif %}
+{% if status == "" and document.placeholder %}
+  {% assign status = "placeholder" %}
+{% endif %}
+
+{% if status == "coming-soon" or status == "placeholder" %}
+  {% assign label = "Coming Soon" %}
+  {% if status == "placeholder" %}
+    {% assign label = "Placeholder" %}
+  {% endif %}
+  <span class="oli-publication-status oli-publication-status--{{ status }}{% if include.variant %} oli-publication-status--{{ include.variant }}{% endif %}">{{ label }}</span>
+{% endif %}

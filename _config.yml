@@ -1,0 +1,207 @@
+# Objective Law Initiative
+# Local Minimal Mistakes build for native GitHub Pages/Jekyll.
+
+title: "Objective Law Initiative"
+title_separator: "|"
+description: "The Objective Law Initiative fights to secure individual rights against arbitrary power by developing and applying a constitutional framework grounded in rational principles of rights and limited government."
+url: "https://objectivelaw.org"
+baseurl: ""
+repository: "objective-law/web-main"
+timezone: "America/Denver"
+locale: "en-US"
+date_format: "%Y-%m-%d"
+permalink: /:categories/:title/
+
+logo: "/assets/images/oli/oli-logo-placeholder.svg"
+masthead_title: "Objective Law Initiative"
+minimal_mistakes_skin: "contrast"
+search: false
+
+plugins:
+  - jekyll-include-cache
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+exclude:
+  - .codex/
+  - .bundle/
+  - .jekyll-cache/
+  - .sass-cache/
+  - .playwright-cli/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - about/index-old.html
+  - vendor/
+
+include:
+  - _pages
+
+collections:
+  faqs:
+    output: false
+  issue_opportunities:
+    output: true
+    permalink: /issue-opportunities/:path/
+  resources:
+    output: true
+    permalink: /resources/:path/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: single
+      author_profile: false
+      classes: wide
+      show_date: false
+      read_time: false
+      share: false
+      header:
+        overlay_color: "#111111"
+        overlay_filter: "linear-gradient(135deg, rgba(17, 17, 17, 0.88), rgba(90, 22, 38, 0.68))"
+        overlay_image_focal_point: "50% 50%"
+        overlay_image_anchor_point: "50% 50%"
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: false
+      classes: wide
+      show_date: false
+      read_time: false
+      share: false
+      permalink: /:basename/
+  - scope:
+      path: "_resources/articles"
+      type: resources
+    values:
+      layout: single
+      type: article
+      resource_type: article
+      share: true
+      show_previous_next: false
+      show_date: true
+      read_time: true
+  - scope:
+      path: "_resources/videos"
+      type: resources
+    values:
+      layout: single
+      type: video
+      resource_type: video
+      share: true
+      show_previous_next: false
+      show_date: true
+      read_time: false
+  - scope:
+      path: "_resources/briefs"
+      type: resources
+    values:
+      layout: single
+      type: brief
+      resource_type: brief
+      share: true
+      show_previous_next: false
+      show_date: true
+      read_time: true
+  - scope:
+      path: "_resources/images"
+      type: resources
+    values:
+      layout: visual_media
+      type: image
+      resource_type: image
+      share: true
+      show_previous_next: false
+      show_date: true
+      read_time: false
+  - scope:
+      path: ""
+      type: issue_opportunities
+    values:
+      layout: single
+      classes: wide
+      author_profile: false
+      share: false
+      show_date: false
+      read_time: false
+      show_read_time: false
+      show_modified_date: false
+      related: false
+      pagination: false
+      show_pagination: false
+      show_previous_next: false
+      show_resource_meta: false
+      show_status_badge: false
+      header:
+        overlay_color: "#111111"
+        overlay_filter: "linear-gradient(135deg, rgba(17, 17, 17, 0.88), rgba(90, 22, 38, 0.68))"
+        overlay_image_focal_point: "50% 50%"
+        overlay_image_anchor_point: "50% 50%"
+  - scope:
+      path: ""
+      type: faqs
+    values:
+      layout: single
+      share: false
+
+author:
+  name: "Objective Law Initiative"
+  bio: "Public-interest legal advocacy for objective law, individual rights, and limited government."
+  links:
+    - label: "Contact"
+      icon: "fas fa-envelope"
+      url: "mailto:info@objectivelaw.org"
+
+twitter:
+  username: "ObjectiveLawOLI"
+
+facebook:
+  publisher: "https://www.facebook.com/ObjectiveLaw/"
+
+footer:
+  since: 2025
+  links:
+    - label: "YouTube"
+      icon: "fab fa-youtube"
+      url: "https://www.youtube.com/@ObjectiveLawInitiative"
+    - label: "Twitter"
+      icon: "fab fa-twitter"
+      url: "https://x.com/ObjectiveLawOLI"
+    - label: "Facebook"
+      icon: "fab fa-facebook"
+      url: "https://www.facebook.com/ObjectiveLaw/"
+    - label: "LinkedIn"
+      icon: "fab fa-linkedin"
+      url: "https://www.linkedin.com/company/objective-law/"
+    - label: "Instagram"
+      icon: "fab fa-instagram"
+      url: "https://www.instagram.com/objectivelawinitiative"
+
+social_share:
+  providers:
+    - twitter
+    - facebook
+    - linkedin
+    - os-share
+    - print
+    - link
+  message: "Read this from Objective Law Initiative:"
+
+atom_feed:
+  hide: true
+
+sass:
+  style: compressed
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  smart_quotes: ["apos", "apos", "quot", "quot"]
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false

@@ -1,0 +1,17 @@
+{% assign resources = site.resources | sort: "title" %}
+<div class="oli-resource-browser" data-oli-resource-browser>
+  <div class="oli-resource-filters" aria-label="Filter resources">
+    <button class="oli-resource-filter is-active" type="button" data-oli-resource-filter="all">All</button>
+    <button class="oli-resource-filter" type="button" data-oli-resource-filter="article">Articles</button>
+    <button class="oli-resource-filter" type="button" data-oli-resource-filter="video">Videos</button>
+    <button class="oli-resource-filter" type="button" data-oli-resource-filter="brief">Briefs</button>
+    <button class="oli-resource-filter" type="button" data-oli-resource-filter="image">Images</button>
+  </div>
+  <p class="oli-section__lead" data-oli-resource-count></p>
+  <div class="oli-resource-grid" data-oli-resource-list>
+    {% for item in resources %}
+      {% include oli/resource-card.html item=item %}
+    {% endfor %}
+  </div>
+  <p class="notice--info" data-oli-resource-empty hidden>No resources match this filter yet.</p>
+</div>

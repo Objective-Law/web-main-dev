@@ -1,0 +1,31 @@
+{%- assign item = include.item -%}
+{%- assign title_level = include.title_level | default: 3 -%}
+{%- assign show_tags = true -%}
+{%- if include.show_tags == false or include.show_tags == "false" -%}
+  {%- assign show_tags = false -%}
+{%- endif -%}
+{%- assign card_eyebrow = include.eyebrow | default: "" | strip -%}
+{%- assign item_description = item.excerpt | default: item.description | default: item.content | strip_html | truncatewords: 32 -%}
+
+<a class="oli-issue-card"
+   href="{{ item.url | relative_url }}"
+   data-oli-issue-opportunity-card
+   data-issue-title="{{ item.title | escape }}"
+   data-issue-tags="{{ item.tags | join: '|' | escape }}">
+  <div class="oli-issue-card__body">
+    {% if card_eyebrow != "" %}
+      <p class="oli-issue-card__eyebrow">{{ card_eyebrow }}</p>
+    {% endif %}
+    <h{{ title_level }} class="oli-issue-card__title">{{ item.title }}</h{{ title_level }}>
+    {% if item_description %}
+      <p class="oli-issue-card__summary">{{ item_description }}</p>
+    {% endif %}
+    {% if show_tags and item.tags and item.tags.size > 0 %}
+      <div class="oli-taxonomy-pills oli-issue-card__tags">
+        {% for tag in item.tags limit: 4 %}
+          <span class="oli-taxonomy-pill">{{ tag | replace: "-", " " }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</a>
