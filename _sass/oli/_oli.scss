@@ -1609,16 +1609,21 @@ a.oli-resource-card .oli-taxonomy-pill {
 }
 
 .oli-toc-widget {
-  --oli-toc-widget-base-bottom: 1rem;
+  --oli-toc-widget-base-bottom: max(1rem, env(safe-area-inset-bottom));
   position: fixed;
-  right: 1rem;
+  right: max(1rem, env(safe-area-inset-right));
   bottom: calc(var(--oli-toc-widget-base-bottom) + var(--oli-toc-widget-lift, 0px));
   z-index: 40;
-  max-width: calc(100% - 2rem);
+  max-width: calc(100vw - 2rem);
+  box-sizing: border-box;
 }
 
 .oli-toc-widget[data-open="true"] {
   z-index: 90;
+}
+
+.oli-toc-widget[data-open="true"] .oli-toc-widget__panel {
+  z-index: 91;
 }
 
 .oli-toc-widget__toggle {
@@ -1628,13 +1633,17 @@ a.oli-resource-card .oli-taxonomy-pill {
   width: 3.3rem;
   height: 3.3rem;
   padding: 0;
-  border: 1px solid rgba(17, 17, 17, 0.14);
+  border: 1px solid rgba(90, 22, 38, 0.16);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 14px 32px rgba(17, 17, 17, 0.14);
   color: var(--oli-burgundy);
   backdrop-filter: blur(12px);
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
 }
 
 .oli-toc-widget__toggle:hover,
@@ -1642,6 +1651,7 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-toc-widget__toggle:focus-visible {
   transform: translateY(-1px);
   border-color: rgba(90, 22, 38, 0.32);
+  background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 18px 36px rgba(17, 17, 17, 0.18);
   color: var(--oli-burgundy-dark);
 }
@@ -1652,7 +1662,7 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-toc-widget__close:focus-visible,
 .oli-toc-widget__link:focus,
 .oli-toc-widget__link:focus-visible {
-  outline: 2px solid rgba(165, 134, 68, 0.42);
+  outline: 2px solid rgba(181, 138, 58, 0.46);
   outline-offset: 3px;
 }
 
@@ -1670,15 +1680,21 @@ a.oli-resource-card .oli-taxonomy-pill {
   position: absolute;
   right: 0;
   bottom: calc(100% + 0.8rem);
+  width: min(23rem, calc(100vw - 2rem));
+  max-width: calc(100vw - 2rem);
+  max-height: min(32rem, calc(100vh - 7rem));
   overflow: hidden;
-  width: 23rem;
-  max-width: calc(100% - 2rem);
-  max-height: calc(100vh - 7rem);
-  border: 1px solid rgba(17, 17, 17, 0.12);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.98);
+  box-sizing: border-box;
+  border: 1px solid rgba(90, 22, 38, 0.13);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 24px 46px rgba(17, 17, 17, 0.18);
   backdrop-filter: blur(18px);
+}
+
+.oli-toc-widget.is-panel-side .oli-toc-widget__panel {
+  right: calc(100% + 0.8rem);
+  bottom: 0;
 }
 
 .oli-toc-widget__panel-header {
@@ -1687,7 +1703,7 @@ a.oli-resource-card .oli-taxonomy-pill {
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.9rem 0.95rem 0.75rem;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+  border-bottom: 1px solid rgba(90, 22, 38, 0.09);
 }
 
 .oli-toc-widget__title {
@@ -1717,17 +1733,22 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-toc-widget__close:hover,
 .oli-toc-widget__close:focus,
 .oli-toc-widget__close:focus-visible {
-  background: rgba(90, 22, 38, 0.1);
   color: var(--oli-burgundy);
+  background: rgba(90, 22, 38, 0.1);
+}
+
+.oli-toc-widget__nav {
+  max-height: inherit;
 }
 
 .oli-toc-widget__list {
-  max-height: calc(100vh - 10rem);
+  max-height: min(27rem, calc(100vh - 10rem));
   margin: 0;
   padding: 0.5rem;
   overflow: auto;
   list-style: none;
   overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .oli-toc-widget__link {
@@ -1735,24 +1756,29 @@ a.oli-resource-card .oli-taxonomy-pill {
   width: 100%;
   padding: 0.58rem 0.7rem;
   border: 0;
-  border-radius: 6px;
+  border-radius: 0.75rem;
   background: transparent;
   color: var(--oli-charcoal);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.35;
   text-align: left;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
 }
 
 .oli-toc-widget__link:hover,
 .oli-toc-widget__link:focus,
-.oli-toc-widget__link:focus-visible,
-.oli-toc-widget__link.is-active {
+.oli-toc-widget__link:focus-visible {
   background: rgba(90, 22, 38, 0.1);
   color: var(--oli-burgundy);
 }
 
 .oli-toc-widget__link.is-active {
+  background: rgba(90, 22, 38, 0.12);
+  color: var(--oli-burgundy);
   font-weight: 800;
 }
 
@@ -1762,6 +1788,14 @@ a.oli-resource-card .oli-taxonomy-pill {
 
 .oli-toc-widget__link--level-4 {
   padding-left: 2.25rem;
+}
+
+.oli-toc-widget__link--level-5 {
+  padding-left: 3rem;
+}
+
+.oli-toc-widget__link--level-6 {
+  padding-left: 3.75rem;
 }
 
 body.oli-toc-widget--overlay-open {
@@ -1920,8 +1954,9 @@ body.oli-toc-widget--overlay-open {
 
 @media (max-width: 767px) {
   .oli-toc-widget {
-    --oli-toc-widget-base-bottom: 0.85rem;
-    right: 0.85rem;
+    --oli-toc-widget-base-bottom: max(0.85rem, env(safe-area-inset-bottom));
+    right: max(0.85rem, env(safe-area-inset-right));
+    bottom: calc(var(--oli-toc-widget-base-bottom) + var(--oli-toc-widget-lift, 0px));
   }
 
   .oli-toc-widget__toggle {
@@ -1929,17 +1964,23 @@ body.oli-toc-widget--overlay-open {
     height: 3.45rem;
   }
 
-  .oli-toc-widget__panel {
+  .oli-toc-widget__panel,
+  .oli-toc-widget.is-panel-side .oli-toc-widget__panel {
     position: fixed;
-    right: 0.85rem;
-    left: 0.85rem;
-    bottom: 4.8rem;
+    right: max(0.85rem, env(safe-area-inset-right));
+    left: max(0.85rem, env(safe-area-inset-left));
+    bottom: calc(max(0.65rem, env(safe-area-inset-bottom)) + 4.15rem);
     width: auto;
-    max-height: calc(100vh - 6.5rem);
+    max-height: min(78vh, calc(100vh - 6.5rem));
+    border-radius: 1.15rem;
+  }
+
+  .oli-toc-widget__panel-header {
+    padding: 1rem 1rem 0.8rem;
   }
 
   .oli-toc-widget__list {
-    max-height: calc(100vh - 10rem);
+    max-height: min(70vh, calc(100vh - 10rem));
   }
 
   .oli-annotation__popover {

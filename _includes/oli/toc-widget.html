@@ -15,11 +15,31 @@
     {% assign toc_widget_max = toc_widget_min %}
   {% endif %}
   {% assign toc_widget_min_headings = page.toc_widget.min_headings | default: 2 | plus: 0 | at_least: 1 %}
-  {% assign toc_widget_id = page.url | slugify | default: page.title | slugify | default: "page" %}
+
+  {% assign toc_widget_id = page.url | slugify %}
+  {% if toc_widget_id == "" %}
+    {% assign toc_widget_id = page.id | default: page.title | default: "page" | slugify %}
+  {% endif %}
+  {% if toc_widget_id == "" %}
+    {% assign toc_widget_id = "page" %}
+  {% endif %}
   {% assign toc_widget_panel_id = "oli-toc-widget-panel-" | append: toc_widget_id %}
 
-  <div class="oli-toc-widget" data-oli-toc-widget data-min-level="{{ toc_widget_min }}" data-max-level="{{ toc_widget_max }}" data-min-headings="{{ toc_widget_min_headings }}" hidden>
-    <button class="oli-toc-widget__toggle" type="button" aria-expanded="false" aria-controls="{{ toc_widget_panel_id }}" aria-label="Toggle page contents" data-oli-toc-widget-toggle>
+  <div
+    class="oli-toc-widget"
+    data-toc-widget
+    data-min-level="{{ toc_widget_min }}"
+    data-max-level="{{ toc_widget_max }}"
+    data-min-headings="{{ toc_widget_min_headings }}"
+  >
+    <button
+      class="oli-toc-widget__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="{{ toc_widget_panel_id }}"
+      aria-label="Toggle page contents"
+      data-toc-widget-toggle
+    >
       <svg class="oli-toc-widget__icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
         <circle cx="7" cy="8" r="1.65"></circle>
         <circle cx="7" cy="14" r="1.65"></circle>
@@ -29,15 +49,26 @@
         <path d="M11.5 20h9"></path>
       </svg>
     </button>
-    <div class="oli-toc-widget__panel" id="{{ toc_widget_panel_id }}" hidden data-oli-toc-widget-panel>
+
+    <div
+      class="oli-toc-widget__panel"
+      id="{{ toc_widget_panel_id }}"
+      hidden
+      data-toc-widget-panel
+    >
       <div class="oli-toc-widget__panel-header">
         <p class="oli-toc-widget__title">On this page</p>
-        <button class="oli-toc-widget__close" type="button" aria-label="Close page contents" data-oli-toc-widget-close>
+        <button
+          class="oli-toc-widget__close"
+          type="button"
+          aria-label="Close page contents"
+          data-toc-widget-close
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <nav class="oli-toc-widget__nav" aria-label="Page contents">
-        <ul class="oli-toc-widget__list" data-oli-toc-widget-list></ul>
+        <ul class="oli-toc-widget__list" data-toc-widget-list></ul>
       </nav>
     </div>
   </div>

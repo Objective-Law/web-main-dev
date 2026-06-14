@@ -1,19 +1,26 @@
 (function () {
-  var widgets = Array.prototype.slice.call(document.querySelectorAll("[data-oli-toc-widget]"));
-  if (!widgets.length) return;
+  const widgets = Array.from(document.querySelectorAll("[data-toc-widget]"));
 
-  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var mobileQuery = window.matchMedia("(max-width: 767px)");
-  var masthead = document.querySelector(".masthead");
+  if (!widgets.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const mobileQuery = window.matchMedia("(max-width: 767px)");
+  const masthead = document.querySelector(".masthead");
 
   function clampLevel(value, fallback) {
-    var parsed = parseInt(value, 10);
-    if (Number.isNaN(parsed)) return fallback;
-    return Math.max(1, Math.min(6, parsed));
+    const number = Number.parseInt(value, 10);
+
+    if (Number.isNaN(number)) {
+      return fallback;
+    }
+
+    return Math.max(1, Math.min(6, number));
   }
 
   function slugify(text) {
-    return (text || "")
+    return text
       .toLowerCase()
       .trim()
       .replace(/['".,()/:[\]!?]+/g, "")
@@ -22,60 +29,113 @@
       .replace(/^-+|-+$/g, "");
   }
 
-  function scrollOffset() {
-    if (!masthead) return 12;
+  function getScrollOffset() {
+    const rootOffset = window.getComputedStyle(document.documentElement).getPropertyValue("--oli-masthead-offset");
+    const parsedOffset = Number.parseFloat(rootOffset);
+
+    if (!Number.isNaN(parsedOffset) && parsedOffset > 0) {
+      return parsedOffset + 12;
+    }
+
+    if (!masthead) {
+      return 12;
+    }
+
     return Math.ceil(masthead.getBoundingClientRect().height) + 12;
   }
 
-  function absoluteTop(element) {
+  function getAbsoluteTop(element) {
     return Math.round(element.getBoundingClientRect().top + window.scrollY);
   }
 
-  function headingLabel(heading) {
-    var clone = heading.cloneNode(true);
-    Array.prototype.slice.call(clone.querySelectorAll(".header-link, .sr-only, .screen-reader-text")).forEach(function (node) {
+  function getScrollTarget(element) {
+    if (element && element.matches(".oli-faq-entry__title")) {
+      return element.closest(".oli-faq-entry") || element;
+    }
+
+    return element;
+  }
+
+  function isMobileViewport() {
+    return mobileQuery.matches;
+  }
+
+  function scrollToTarget(target) {
+    const scrollTarget = getScrollTarget(target);
+    const top = Math.max(0, getAbsoluteTop(scrollTarget) - getScrollOffset());
+
+    window.scrollTo({
+      top: top,
+      behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+    });
+  }
+
+  function scrollToPageTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+    });
+  }
+
+  function getHeadingLabel(heading) {
+    const clone = heading.cloneNode(true);
+
+    Array.from(clone.querySelectorAll(".header-link, .sr-only")).forEach(function (node) {
       node.remove();
     });
+
     return (clone.textContent || "").replace(/\s+/g, " ").trim();
   }
 
-  function hiddenHeading(heading) {
-    if (!heading || heading.hidden || heading.closest("[hidden]")) return true;
-    if (heading.closest(".sidebar__right, .toc, nav, aside, .page__meta, footer, .oli-share, .oli-resource-page__meta")) return true;
+  function isHiddenHeading(heading) {
+    if (!heading) {
+      return true;
+    }
+
+    if (
+      heading.matches(".screen-reader-text, .sr-only, .visually-hidden") ||
+      heading.hasAttribute("data-resource-results-heading") ||
+      heading.closest(".screen-reader-text, .sr-only, .visually-hidden, [data-resource-results-heading]")
+    ) {
+      return true;
+    }
+
+    if (heading.hidden || heading.closest("[hidden]")) {
+      return true;
+    }
+
     return heading.getClientRects().length === 0;
   }
 
-  function init(widget) {
-    var toggle = widget.querySelector("[data-oli-toc-widget-toggle]");
-    var panel = widget.querySelector("[data-oli-toc-widget-panel]");
-    var closeButton = widget.querySelector("[data-oli-toc-widget-close]");
-    var list = widget.querySelector("[data-oli-toc-widget-list]");
-    var page = widget.closest(".page");
-    var content = page ? page.querySelector(".page__content") : null;
-    var footer = document.querySelector(".page__footer");
-    var minLevel = clampLevel(widget.getAttribute("data-min-level"), 2);
-    var maxLevel = Math.max(minLevel, clampLevel(widget.getAttribute("data-max-level"), 4));
-    var minHeadings = Math.max(1, parseInt(widget.getAttribute("data-min-headings") || "2", 10));
-    var selectors = [];
-    var items = [];
-    var activeId = "";
-    var open = false;
-    var ticking = false;
+  function initWidget(widget) {
+    const toggle = widget.querySelector("[data-toc-widget-toggle]");
+    const panel = widget.querySelector("[data-toc-widget-panel]");
+    const closeButton = widget.querySelector("[data-toc-widget-close]");
+    const list = widget.querySelector("[data-toc-widget-list]");
+    const page = widget.closest(".page");
+    const content = page ? page.querySelector(".page__content") : null;
+    const topTarget = content || page;
+    const pageFooter = document.querySelector(".page__footer");
+    const minLevel = clampLevel(widget.dataset.minLevel, 2);
+    const maxLevel = Math.max(minLevel, clampLevel(widget.dataset.maxLevel, 4));
+    const minHeadings = Math.max(1, Number.parseInt(widget.dataset.minHeadings || "2", 10));
+    const selectors = [];
+    let items = [];
+    let activeId = "";
+    let isOpen = false;
+    let scrollTicking = false;
 
-    if (!toggle || !panel || !list || !content) {
+    if (!toggle || !panel || !list || !topTarget || !content) {
       widget.hidden = true;
       return;
     }
 
-    if (widget.parentNode !== document.body) document.body.appendChild(widget);
-    for (var level = minLevel; level <= maxLevel; level += 1) selectors.push("h" + level);
+    if (widget.parentNode !== document.body) {
+      document.body.appendChild(widget);
+    }
 
-    function closePanel() {
-      open = false;
-      widget.setAttribute("data-open", "false");
-      toggle.setAttribute("aria-expanded", "false");
-      panel.hidden = true;
-      document.body.classList.remove("oli-toc-widget--overlay-open");
+    for (let level = minLevel; level <= maxLevel; level += 1) {
+      selectors.push("h" + level);
     }
 
     function hideWidget() {
@@ -88,144 +148,335 @@
         usedIds.add(heading.id);
         return heading.id;
       }
-      var base = slugify(headingLabel(heading)) || "section";
-      var candidate = base;
-      var index = 2;
+
+      const base = slugify(heading.textContent || "") || "section";
+      let candidate = base;
+      let index = 2;
+
       while (usedIds.has(candidate) || document.getElementById(candidate)) {
         candidate = base + "-" + index;
         index += 1;
       }
+
       heading.id = candidate;
       usedIds.add(candidate);
       return candidate;
     }
 
-    function scrollToTarget(target) {
-      window.scrollTo({
-        top: Math.max(0, absoluteTop(target) - scrollOffset()),
-        behavior: reducedMotion.matches ? "auto" : "smooth"
-      });
-    }
-
-    function buildButton(item) {
-      var li = document.createElement("li");
-      var button = document.createElement("button");
+    function buildItem(target, label, level, id) {
+      const item = document.createElement("li");
+      const button = document.createElement("button");
       button.type = "button";
       button.className = "oli-toc-widget__link";
-      button.dataset.targetId = item.id;
-      button.textContent = item.label;
-      if (item.level > 0) button.classList.add("oli-toc-widget__link--level-" + item.level);
+      button.dataset.targetId = id;
+      button.textContent = label;
+
+      if (level > 0) {
+        button.classList.add("oli-toc-widget__link--level-" + level);
+      }
+
       button.addEventListener("click", function () {
-        if (item.id === "top") {
-          window.scrollTo({ top: 0, behavior: reducedMotion.matches ? "auto" : "smooth" });
+        if (id === "top") {
+          scrollToPageTop();
         } else {
-          scrollToTarget(item.target);
+          scrollToTarget(target);
         }
-        if (mobileQuery.matches) closePanel();
-      });
-      li.appendChild(button);
-      return li;
-    }
 
-    function footerClearance() {
-      if (!footer) {
-        widget.style.setProperty("--oli-toc-widget-lift", "0px");
-        return;
-      }
-      var footerRect = footer.getBoundingClientRect();
-      var styles = window.getComputedStyle(widget);
-      var baseBottom = parseFloat(styles.getPropertyValue("--oli-toc-widget-base-bottom")) || 0;
-      var lift = Math.max(0, Math.ceil(window.innerHeight - footerRect.top + 16 - baseBottom));
-      widget.style.setProperty("--oli-toc-widget-lift", lift + "px");
-    }
+        if (isMobileViewport()) {
+          closePanel();
+        }
+      });
 
-    function updateActive() {
-      if (!items.length) return;
-      var marker = window.scrollY + scrollOffset() + 16;
-      var nextActive = "top";
-      items.forEach(function (item) {
-        if (absoluteTop(item.target) <= marker) nextActive = item.id;
-      });
-      if (Math.ceil(window.scrollY + window.innerHeight) >= Math.ceil(document.documentElement.scrollHeight) - 4) {
-        nextActive = items[items.length - 1].id;
-      }
-      if (activeId === nextActive) return;
-      activeId = nextActive;
-      Array.prototype.slice.call(list.querySelectorAll(".oli-toc-widget__link")).forEach(function (button) {
-        var active = button.dataset.targetId === activeId;
-        button.classList.toggle("is-active", active);
-        if (active) button.setAttribute("aria-current", "true");
-        else button.removeAttribute("aria-current");
-      });
+      item.appendChild(button);
+      return item;
     }
 
     function render() {
-      var usedIds = new Set(Array.prototype.slice.call(document.querySelectorAll("[id]")).map(function (element) {
+      const usedIds = new Set(Array.from(document.querySelectorAll("[id]"), function (element) {
         return element.id;
       }));
-      var headings = Array.prototype.slice.call(content.querySelectorAll(selectors.join(","))).filter(function (heading) {
-        return headingLabel(heading) && !hiddenHeading(heading);
+
+      const headings = Array.from(content.querySelectorAll(selectors.join(","))).filter(function (heading) {
+        const label = getHeadingLabel(heading);
+
+        if (!label) {
+          return false;
+        }
+
+        if (isHiddenHeading(heading)) {
+          return false;
+        }
+
+        return !heading.closest(".sidebar__right, .toc, nav, aside:not(.sidebar__right), .page__meta, footer");
       });
+
       items = headings.map(function (heading) {
+        const level = Number.parseInt(heading.tagName.slice(1), 10);
+
         return {
           id: ensureId(heading, usedIds),
-          label: headingLabel(heading),
-          level: parseInt(heading.tagName.slice(1), 10),
+          label: getHeadingLabel(heading),
+          level: level,
           target: heading
         };
       });
+
       if (items.length < minHeadings) {
         hideWidget();
         return;
       }
+
       widget.hidden = false;
       list.innerHTML = "";
-      list.appendChild(buildButton({ id: "top", label: "Top", level: 0, target: content }));
+      list.appendChild(buildItem(topTarget, "Top", 0, "top"));
+
       items.forEach(function (item) {
-        list.appendChild(buildButton(item));
+        list.appendChild(buildItem(item.target, item.label, item.level, item.id));
       });
-      footerClearance();
-      updateActive();
-      closePanel();
+
+      syncPlacement();
+      syncFooterClearance();
+      updateActiveItem();
+    }
+
+    function syncPlacement() {
+      const shouldUseSidePanel = !isMobileViewport() && window.innerHeight < 640 && window.innerWidth >= 1100;
+      widget.classList.toggle("is-panel-side", shouldUseSidePanel);
+    }
+
+    function syncFooterClearance() {
+      if (!pageFooter) {
+        widget.style.setProperty("--oli-toc-widget-lift", "0px");
+        return;
+      }
+
+      const footerRect = pageFooter.getBoundingClientRect();
+      const widgetStyles = window.getComputedStyle(widget);
+      const baseBottom = Number.parseFloat(widgetStyles.getPropertyValue("--oli-toc-widget-base-bottom")) || 0;
+      const requiredLift = Math.max(0, Math.ceil(window.innerHeight - footerRect.top + 16 - baseBottom));
+
+      widget.style.setProperty("--oli-toc-widget-lift", requiredLift + "px");
+    }
+
+    function syncBodyLock() {
+      document.body.classList.toggle("oli-toc-widget--overlay-open", isOpen && isMobileViewport());
+    }
+
+    function openPanel() {
+      isOpen = true;
+      widget.dataset.open = "true";
+      toggle.setAttribute("aria-expanded", "true");
+      panel.hidden = false;
+      syncBodyLock();
+      updateActiveItem(true);
+
+      window.requestAnimationFrame(function () {
+        updateActiveItem(true);
+      });
+    }
+
+    function closePanel() {
+      isOpen = false;
+      widget.dataset.open = "false";
+      toggle.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+      syncBodyLock();
+    }
+
+    function togglePanel() {
+      if (isOpen) {
+        closePanel();
+        return;
+      }
+
+      openPanel();
+    }
+
+    function getTocScrollContainer(button) {
+      const candidates = [
+        button.closest(".oli-toc-widget__list"),
+        button.closest(".oli-toc-widget__nav"),
+        button.closest(".oli-toc-widget__panel")
+      ];
+
+      return candidates.find(function (candidate) {
+        return candidate && candidate.scrollHeight > candidate.clientHeight;
+      });
+    }
+
+    function scrollTocButtonIntoView(button) {
+      const scrollContainer = getTocScrollContainer(button);
+
+      if (!scrollContainer) {
+        button.scrollIntoView({ block: "nearest", inline: "nearest" });
+        return;
+      }
+
+      const buttonRect = button.getBoundingClientRect();
+      const containerRect = scrollContainer.getBoundingClientRect();
+      const gap = 8;
+
+      if (buttonRect.top < containerRect.top + gap) {
+        scrollContainer.scrollTop += buttonRect.top - containerRect.top - gap;
+      } else if (buttonRect.bottom > containerRect.bottom - gap) {
+        scrollContainer.scrollTop += buttonRect.bottom - containerRect.bottom + gap;
+      }
+    }
+
+    function getHashActiveId() {
+      if (!window.location.hash) {
+        return "";
+      }
+
+      let hashId = "";
+
+      try {
+        hashId = decodeURIComponent(window.location.hash.slice(1));
+      } catch (error) {
+        hashId = window.location.hash.slice(1);
+      }
+
+      if (!hashId) {
+        return "";
+      }
+
+      const hashItem = items.find(function (item) {
+        return item.id === hashId;
+      });
+
+      if (!hashItem) {
+        return "";
+      }
+
+      const targetRect = getScrollTarget(hashItem.target).getBoundingClientRect();
+      const offset = getScrollOffset();
+      const activationTop = offset - 24;
+      const activationBottom = Math.min(window.innerHeight, offset + 220);
+
+      if (targetRect.top <= activationBottom && targetRect.bottom > activationTop) {
+        return hashItem.id;
+      }
+
+      return "";
+    }
+
+    function updateActiveItem(forceActiveIntoView) {
+      if (!items.length) {
+        return;
+      }
+
+      const marker = window.scrollY + getScrollOffset() + 16;
+      const documentBottom = Math.ceil(window.scrollY + window.innerHeight);
+      const pageBottom = Math.ceil(document.documentElement.scrollHeight);
+      let nextActiveId = "top";
+
+      items.forEach(function (item) {
+        if (getAbsoluteTop(getScrollTarget(item.target)) <= marker) {
+          nextActiveId = item.id;
+        }
+      });
+
+      nextActiveId = getHashActiveId() || nextActiveId;
+
+      if (documentBottom >= pageBottom - 4) {
+        nextActiveId = items[items.length - 1].id;
+      }
+
+      if (activeId === nextActiveId && !forceActiveIntoView) {
+        return;
+      }
+
+      activeId = nextActiveId;
+
+      Array.from(list.querySelectorAll(".oli-toc-widget__link")).forEach(function (button) {
+        const isActive = button.dataset.targetId === activeId;
+        button.classList.toggle("is-active", isActive);
+
+        if (isActive) {
+          button.setAttribute("aria-current", "true");
+
+          if (isOpen && (forceActiveIntoView || activeId === nextActiveId)) {
+            scrollTocButtonIntoView(button);
+          }
+        } else {
+          button.removeAttribute("aria-current");
+        }
+      });
     }
 
     toggle.addEventListener("click", function () {
-      open = !open;
-      widget.setAttribute("data-open", open ? "true" : "false");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      panel.hidden = !open;
-      document.body.classList.toggle("oli-toc-widget--overlay-open", open && mobileQuery.matches);
-      updateActive();
+      togglePanel();
     });
+
     closeButton.addEventListener("click", function () {
       closePanel();
       toggle.focus();
     });
+
     document.addEventListener("click", function (event) {
-      if (open && !widget.contains(event.target)) closePanel();
-    });
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && open) {
-        closePanel();
-        toggle.focus();
+      if (!isOpen) {
+        return;
       }
+
+      if (widget.contains(event.target)) {
+        return;
+      }
+
+      closePanel();
     });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape" || !isOpen) {
+        return;
+      }
+
+      closePanel();
+      toggle.focus();
+    });
+
     window.addEventListener("resize", function () {
-      footerClearance();
-      updateActive();
+      syncPlacement();
+      syncBodyLock();
+      syncFooterClearance();
+      updateActiveItem();
     });
+
+    window.addEventListener("orientationchange", function () {
+      syncPlacement();
+      syncBodyLock();
+      syncFooterClearance();
+      updateActiveItem();
+    });
+
     window.addEventListener("scroll", function () {
-      if (ticking) return;
-      ticking = true;
+      if (scrollTicking) {
+        return;
+      }
+
+      scrollTicking = true;
       window.requestAnimationFrame(function () {
-        ticking = false;
-        footerClearance();
-        updateActive();
+        scrollTicking = false;
+        syncFooterClearance();
+        updateActiveItem();
       });
     }, { passive: true });
-    window.addEventListener("load", render);
+
+    window.addEventListener("load", function () {
+      render();
+      syncFooterClearance();
+      updateActiveItem();
+    });
+
+    document.addEventListener("oli:toc-update", function () {
+      render();
+      syncFooterClearance();
+      updateActiveItem();
+    });
+
     render();
+    syncFooterClearance();
+    closePanel();
   }
 
-  widgets.forEach(init);
+  widgets.forEach(initWidget);
 })();
