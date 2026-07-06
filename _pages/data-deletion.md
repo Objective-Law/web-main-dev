@@ -1,7 +1,7 @@
 ---
 title: "Data Deletion Instructions"
 date: "2026-06-10"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 show_modified_date: true
 toc_widget:
   enabled: true
@@ -10,6 +10,10 @@ toc_widget:
 header:
   kicker: "Legal"
   overlay_title: "Data Deletion Instructions"
+  overlay_images:
+  - image: /assets/images/overlay/legal.webp
+    focal_point: "66% 66%"
+    anchor_point: "66% 66%"
   actions:
     - label: "Terms of Service"
       url: /terms/
@@ -22,13 +26,14 @@ header:
       class: "oli-button oli-button--overlay"
 ---
 
+{% assign date_format = site.date_format | default: "%Y-%m-%d" %}
+_Last Updated: {{ page.last_modified_at | date: date_format }}_
+
 ## Data Deletion Requests
 
 OLI does not maintain public user accounts through this website.
 
-If you have interacted with OLI and would like to request deletion of personal information associated with you, you may submit a request by contacting:
-
-info@objectivelaw.org
+If you have interacted with OLI and would like to request deletion of personal information associated with you, you may submit a request by contacting [info@objectivelaw.org](mailto:info@objectivelaw.org).
 
 ## Scope of Deletion
 
@@ -68,7 +73,4 @@ We will make reasonable efforts to respond to valid deletion requests within a r
 
 ## Contact
 
-To submit a request or ask questions about data deletion, contact:
-
-Objective Law Initiative
-info@objectivelaw.org
+To submit a request or ask questions about data deletion, contact [info@objectivelaw.org](mailto:info@objectivelaw.org).

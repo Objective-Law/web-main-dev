@@ -26,15 +26,84 @@
   {%- assign author_twitter = author.twitter | replace: "@", "" -%}
 {%- endif -%}
 
-{%- assign page_large_image = page.header.og_image | default: page.header.overlay_image | default: page.header.image | absolute_url | escape -%}
-{%- assign page_teaser_image = page.header.teaser | default: site.og_image | absolute_url | escape -%}
-{%- assign site_og_image = site.og_image | absolute_url | escape -%}
-{%- assign og_image_alt = page.header.og_image_alt | default: site.og_image_alt | escape -%}
+{%- assign page_collection = page.collection | default: "" | strip -%}
+{%- assign page_resource_type = page.resource_type | default: page.type | default: "" | strip -%}
+{%- assign is_article_like_page = false -%}
+{%- unless page.placeholder == true -%}
+  {%- if page.og_type == "article" -%}
+    {%- assign is_article_like_page = true -%}
+  {%- elsif page_collection == "posts" or page.path contains "_posts/" -%}
+    {%- assign is_article_like_page = true -%}
+  {%- elsif page_collection == "resources" and page_resource_type == "article" -%}
+    {%- assign is_article_like_page = true -%}
+  {%- elsif page_collection == "resources" and page_resource_type == "brief" -%}
+    {%- assign is_article_like_page = true -%}
+  {%- elsif page.path contains "_resources/articles/" or page.path contains "_resources/briefs/" -%}
+    {%- assign is_article_like_page = true -%}
+  {%- endif -%}
+{%- endunless -%}
 
-{%- if page.date -%}
+{%- capture auto_og_image -%}{% include oli/resolve-page-image.html page=page bucket="og" %}{%- endcapture -%}
+{%- assign auto_og_image = auto_og_image | strip -%}
+{%- capture auto_visual_media_thumbnail -%}{% include oli/resolve-page-image.html page=page bucket="visual-media/thumbnails" %}{%- endcapture -%}
+{%- assign auto_visual_media_thumbnail = auto_visual_media_thumbnail | strip -%}
+{%- capture auto_overlay_image -%}{% include oli/resolve-page-image.html page=page bucket="overlay" %}{%- endcapture -%}
+{%- assign auto_overlay_image = auto_overlay_image | strip -%}
+{%- assign carousel_overlay_image = "" -%}
+{%- if page.header.overlay_images and page.header.overlay_images.size > 0 -%}
+  {%- assign carousel_overlay_image = page.header.overlay_images[0].image | default: "" -%}
+{%- endif -%}
+
+{%- comment -%}
+  Social images resolve in this order: explicit page/header social image,
+  convention-based OG image, visual-media thumbnail, convention-based overlay,
+  explicit hero image, then the configured OLI fallback image.
+{%- endcomment -%}
+{%- assign site_og_image_path = site.og_image | default: site.logo | default: "" | strip -%}
+{%- assign page_large_image_path = page.og_image
+  | default: page.header.og_image
+  | default: auto_og_image
+  | default: page.thumbnail
+  | default: auto_visual_media_thumbnail
+  | default: auto_overlay_image
+  | default: carousel_overlay_image
+  | default: page.header.overlay_image
+  | default: page.header.image
+  | default: site_og_image_path
+  | default: ""
+  | strip
+-%}
+{%- assign page_large_image_raw = "" -%}
+{%- if page_large_image_path != "" -%}
+  {%- assign page_large_image_raw = page_large_image_path | absolute_url -%}
+{%- endif -%}
+{%- assign page_large_image = page_large_image_raw | escape -%}
+{%- assign og_image_alt = page.og_image_alt
+  | default: page.header.og_image_alt
+  | default: page.thumbnail_alt
+  | default: page.header.overlay_image_alt
+  | default: page.header.image_alt
+  | default: ""
+  | strip
+-%}
+{%- assign is_fallback_social_image = false -%}
+{%- if page_large_image_path == site_og_image_path -%}
+  {%- assign is_fallback_social_image = true -%}
+  {%- assign og_image_alt = site.og_image_alt | default: og_image_alt | strip -%}
+{%- endif -%}
+{%- assign og_image_alt = og_image_alt | escape -%}
+
+{%- assign og_type = "website" -%}
+{%- if is_article_like_page -%}
   {%- assign og_type = "article" -%}
-{%- else -%}
-  {%- assign og_type = "website" -%}
+{%- endif -%}
+{%- assign explicit_og_type = page.og_type | default: "" | strip -%}
+{%- if explicit_og_type != "" and page.placeholder != true -%}
+  {%- assign og_type = explicit_og_type -%}
+{%- endif -%}
+{%- assign twitter_card = "summary" -%}
+{%- if page_large_image_path != "" and is_fallback_social_image != true -%}
+  {%- assign twitter_card = "summary_large_image" -%}
 {%- endif -%}
 
 <title>{{ seo_title }}{% if paginator %}{% unless paginator.page == 1 %} {{ title_separator }} {{ site.data.ui-text[locale].page | default: "Page" }} {{ paginator.page }}{% endunless %}{% endif %}</title>
@@ -57,38 +126,28 @@
   <meta property="og:description" content="{{ seo_description }}">
 {% endif %}
 
-{% if page_large_image %}
+{% if page_large_image != "" %}
   <meta property="og:image" content="{{ page_large_image }}">
-  {% if og_image_alt %}
-    <meta property="og:image:alt" content="{{ og_image_alt }}">
-  {% endif %}
-{% elsif page_teaser_image %}
-  <meta property="og:image" content="{{ page_teaser_image }}">
-  {% if og_image_alt %}
+  {% if og_image_alt != "" %}
     <meta property="og:image:alt" content="{{ og_image_alt }}">
   {% endif %}
 {% endif %}
 
-{% if site.twitter.username %}
-  <meta name="twitter:site" content="@{{ site.twitter.username | replace: "@", "" }}">
+{% assign twitter_username = site.twitter.username | default: "" | strip %}
+{% if twitter_username != "" %}
+  <meta name="twitter:site" content="@{{ twitter_username | replace: "@", "" }}">
   <meta name="twitter:title" content="{{ page_title }}">
   <meta name="twitter:description" content="{{ seo_description }}">
   <meta name="twitter:url" content="{{ canonical_url }}">
 
-  {% if page_large_image %}
-    <meta name="twitter:card" content="summary_large_image">
+  {% if page_large_image != "" %}
+    <meta name="twitter:card" content="{{ twitter_card }}">
     <meta name="twitter:image" content="{{ page_large_image }}">
-    {% if og_image_alt %}
+    {% if og_image_alt != "" %}
       <meta name="twitter:image:alt" content="{{ og_image_alt }}">
     {% endif %}
   {% else %}
     <meta name="twitter:card" content="summary">
-    {% if page_teaser_image %}
-      <meta name="twitter:image" content="{{ page_teaser_image }}">
-      {% if og_image_alt %}
-        <meta name="twitter:image:alt" content="{{ og_image_alt }}">
-      {% endif %}
-    {% endif %}
   {% endif %}
 
   {% if author_twitter %}
@@ -100,7 +159,7 @@
   <meta name="fediverse:creator" content="{{ author.fediverse }}">
 {% endif %}
 
-{% if page.date %}
+{% if og_type == "article" and page.date %}
   <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
 {% endif %}
 
@@ -109,12 +168,14 @@
 {% endif %}
 
 {% if site.facebook %}
-  {% if site.facebook.publisher %}
+  {% assign facebook_publisher = site.facebook.publisher | default: "" | strip %}
+  {% assign facebook_app_id = site.facebook.app_id | default: "" | strip %}
+  {% if og_type == "article" and facebook_publisher != "" %}
     <meta property="article:publisher" content="{{ site.facebook.publisher }}">
   {% endif %}
 
-  {% if site.facebook.app_id %}
-    <meta property="fb:app_id" content="{{ site.facebook.app_id }}">
+  {% if facebook_app_id != "" %}
+    <meta property="fb:app_id" content="{{ facebook_app_id }}">
   {% endif %}
 {% endif %}
 
@@ -129,6 +190,31 @@
 
 {% if page.url == '/' %}
   {% include schema.html %}
+{% endif %}
+
+{% if is_article_like_page %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {{ canonical_url | jsonify }},
+      "headline": {{ page_title | jsonify }},
+      "url": {{ canonical_url | jsonify }}{% if seo_description %},
+      "description": {{ seo_description | jsonify }}{% endif %}{% if site.locale %},
+      "inLanguage": {{ site.locale | jsonify }}{% endif %}{% if page.date %},
+      "datePublished": {{ page.date | date_to_xmlschema | jsonify }}{% endif %}{% if page.last_modified_at %},
+      "dateModified": {{ page.last_modified_at | date_to_xmlschema | jsonify }}{% endif %}{% if page_large_image_raw != "" %},
+      "image": [{{ page_large_image_raw | jsonify }}]{% endif %},
+      "publisher": {
+        "@type": "Organization",
+        "name": {{ site.title | jsonify }}{% if site.logo %},
+        "logo": {
+          "@type": "ImageObject",
+          "url": {{ site.logo | absolute_url | jsonify }}
+        }{% endif %}
+      }
+    }
+  </script>
 {% endif %}
 
 {% if site.google_site_verification %}

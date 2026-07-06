@@ -22,13 +22,29 @@
   {%- endcapture -%}
   {%- assign image_stem = image_stem | strip -%}
   {%- if image_stem != "" -%}
-    {%- for image_extension in image_extensions -%}
-      {%- assign candidate_path = "/assets/images/" | append: image_bucket | append: "/" | append: image_stem | append: "." | append: image_extension -%}
-      {%- assign matching_files = site.static_files | where_exp: "file", "file.path == candidate_path" -%}
-      {%- if matching_files and matching_files.size > 0 -%}
-        {{ candidate_path }}
-        {%- break -%}
-      {%- endif -%}
+    {%- assign leaf_stem = image_path_parts[-1]
+      | replace: ".markdown", ""
+      | replace: ".md", ""
+      | replace: ".html", ""
+      | replace: ".htm", ""
+      | remove_first: "_"
+      | strip
+    -%}
+    {%- assign image_stems_csv = image_stem | append: "," | append: leaf_stem -%}
+    {%- assign image_stems = image_stems_csv | split: "," | uniq -%}
+    {%- assign image_found = false -%}
+    {%- for candidate_stem in image_stems -%}
+      {%- unless image_found -%}
+        {%- for image_extension in image_extensions -%}
+          {%- assign candidate_path = "/assets/images/" | append: image_bucket | append: "/" | append: candidate_stem | append: "." | append: image_extension -%}
+          {%- assign matching_files = site.static_files | where_exp: "file", "file.path == candidate_path" -%}
+          {%- if matching_files and matching_files.size > 0 -%}
+            {{ candidate_path }}
+            {%- assign image_found = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endunless -%}
     {%- endfor -%}
   {%- endif -%}
 {%- endif -%}

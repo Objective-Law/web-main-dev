@@ -1,21 +1,20 @@
 ---
-title: "Objective Law Initiative"
+title: "The Objective Law Initiative"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 permalink: /
 excerpt: "The Objective Law Initiative fights to secure individual rights against arbitrary power by developing and applying a constitutional framework grounded in rational principles of rights and limited government."
 tagline: "A public-interest legal initiative for objective law, individual rights, and limited government."
 classes: wide
 header:
-  kicker: "Objective Law Initiative"
-  overlay_title: "Objective Law Initiative"
+  # kicker: "Objective Law Initiative"
+  overlay_title: "The Objective Law Initiative"
   overlay_title_width: "48rem"
-  overlay_interval: 4800
+  # overlay_interval: 4800
   overlay_images:
-    - image: /assets/images/Supreme_Court.jpg
-      focal_point: "50% 45%"
-      anchor_point: "50% 50%"
-    - image: /assets/images/oli/themis-columns.svg
+    - image: /assets/images/overlay/index.webp
+      focal_point: "80% 25%"
+      anchor_point: "80% 25%"
   actions:
     - label: "About OLI"
       url: /about/
@@ -72,14 +71,14 @@ header:
   </section>
 
   <section class="oli-section">
-    <h2>Build capacity before the next briefing window closes.</h2>
+    <h2>Help us scale before the next briefing window closes.</h2>
     <p>OLI needs research, editorial, legal, technical, and donor-development capacity before major cases reach the decisive stage. Support helps turn a principled framework into timely legal work and public explanation.</p>
     <div class="oli-actions">
       <a class="oli-button" href="/contribute/">Support OLI</a>
       <a class="oli-button oli-button--secondary" href="/about/">Learn About OLI</a>
     </div>
   </section>
-
+{% comment %}
   <section class="oli-section oli-video-placeholder" aria-label="Introductory video placeholder">
     <div class="oli-video-placeholder__inner">
       <span class="oli-video-placeholder__icon"><i class="fas fa-play" aria-hidden="true"></i></span>
@@ -87,4 +86,5 @@ header:
       <p>The first OLI video will introduce the mission, legal focus, and contribution posture. No video is embedded until an official asset exists.</p>
     </div>
   </section>
+{% endcomment %}
 </div>

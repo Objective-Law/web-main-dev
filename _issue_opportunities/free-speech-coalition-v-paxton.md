@@ -1,7 +1,7 @@
 ---
 title: "Free Speech Coalition, Inc. v. Paxton"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 50
 status: decided
 featured_home: false
@@ -49,4 +49,4 @@ Age-verification and identity-based access laws are spreading quickly. A standin
 
 ## Clarification
 
-This page is not an endorsement of pornography or any particular website. It treats the case as an example of the need to protect lawful adult speech and private judgment while allowing objective laws that protect minors.
+OLI's concern is not endorsement of pornography or any particular website. The principle is that lawful adult speech and private judgment require constitutional protection, even while government may enact objective laws that protect minors.

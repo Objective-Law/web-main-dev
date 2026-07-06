@@ -1,7 +1,7 @@
 ---
 title: "Securities and Exchange Commission v. Jarkesy"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 80
 status: decided
 featured_home: false
@@ -51,4 +51,4 @@ Administrative-law cases often appear technical. But they shape the practical fr
 
 ## Clarification
 
-This page does not take a position on the factual allegations against Jarkesy. It identifies the case as an example of the need for independent adjudication when government seeks punitive sanctions.
+OLI's concern is not the truth or falsity of the allegations against Jarkesy. The principle is that when government seeks punitive sanctions, the target is entitled to independent adjudication and the constitutional protections that attach to legal punishment.

@@ -1,7 +1,7 @@
 ---
 title: "Mahmoud v. Taylor"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 40
 status: decided
 featured_home: false
@@ -53,4 +53,4 @@ Education cases often have broad cultural significance but are legally difficult
 
 ## Clarification
 
-This page is not an endorsement of any religious doctrine or curriculum position. It identifies the case as an example of the need for objective limits on the state's role in child formation.
+OLI's concern is not endorsement of any religious doctrine or curriculum position. The principle is that government education must remain subject to objective constitutional limits when it reaches questions of conscience, parental authority, and child formation.

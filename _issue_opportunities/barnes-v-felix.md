@@ -1,7 +1,7 @@
 ---
 title: "Barnes v. Felix"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 60
 status: decided
 featured_home: false
@@ -53,4 +53,4 @@ With standing research and briefing capacity, OLI could have been ready to expla
 
 ## Clarification
 
-This page is not anti-police. It treats Barnes as an example of the need for objective legal standards governing government force.
+OLI's concern is not hostility to law enforcement. Police officers face real dangers and must be able to use lawful force when justified. The principle is that government force must be judged under objective standards that consider the full circumstances rather than artificial legal shortcuts.

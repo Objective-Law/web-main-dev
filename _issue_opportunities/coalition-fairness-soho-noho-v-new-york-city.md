@@ -1,7 +1,7 @@
 ---
 title: "Coalition for Fairness in Soho and Noho, Inc. v. New York City"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 170
 status: potential
 featured_home: false
@@ -51,4 +51,4 @@ Land-use cases are fact-intensive and often procedurally complex. OLI can help b
 
 ## Clarification
 
-This page relies on the case name and issue description supplied for site-planning purposes. Before publication, verify the caption, procedural posture, docket, and current status if this page is to include specific litigation details beyond the principle stated here.
+OLI's concern is not endorsement of any particular development proposal, zoning policy, or land-use outcome. The principle is that government may not use discretionary permitting power to extract unrelated concessions from property owners or convert permission to build into a tool of political bargaining.

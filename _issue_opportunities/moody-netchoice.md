@@ -1,7 +1,7 @@
 ---
 title: "Moody v. NetChoice, LLC / NetChoice, LLC v. Paxton"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 70
 status: decided
 featured_home: false
@@ -53,4 +53,4 @@ Platform-regulation cases will continue. OLI can contribute by developing a prin
 
 ## Clarification
 
-This page is not a defense of any specific platform's moderation choices. It identifies the cases as examples of compelled carriage and state interference with private editorial judgment.
+OLI's concern is not defense of any particular platform's moderation choices. The principle is that private editorial judgment cannot be converted into compelled carriage merely because government officials dislike how private speakers organize, rank, or present expression.

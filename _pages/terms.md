@@ -1,7 +1,7 @@
 ---
 title: "Terms of Service"
 date: "2026-06-10"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 show_modified_date: true
 show_read_time: true
 toc_widget:
@@ -11,6 +11,10 @@ toc_widget:
 header:
   kicker: "Legal"
   overlay_title: "Terms of Service"
+  overlay_images:
+  - image: /assets/images/overlay/legal.webp
+    focal_point: "66% 66%"
+    anchor_point: "66% 66%"
   actions:
     - label: "Privacy Policy"
       url: /privacy/
@@ -172,7 +176,4 @@ Any dispute arising out of or relating to these Terms or this website shall be r
 
 ## 17. Contact
 
-Questions about these Terms may be sent to:
-
-Objective Law Initiative
-info@objectivelaw.org
+Questions about this policy may be sent to [info@objectivelaw.org](mailto:info@objectivelaw.org).

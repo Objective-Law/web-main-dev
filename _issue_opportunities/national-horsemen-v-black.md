@@ -1,7 +1,7 @@
 ---
 title: "National Horsemen's Benevolent & Protective Ass'n v. Black"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 180
 status: potential
 featured_home: false
@@ -53,4 +53,4 @@ Private-delegation cases can affect many industries, including finance, sports, 
 
 ## Clarification
 
-This page relies on the case name supplied for site-planning purposes and treats the matter as an issue opportunity. Before publication, verify the exact caption, docket, procedural posture, and relationship to the broader Horseracing Integrity and Safety Authority litigation.
+OLI's concern is not horse-racing policy. The principle is that coercive regulatory power must remain accountable to constitutional limits and may not be insulated from due process, separation-of-powers, or nondelegation constraints by placing it in nominally private hands.

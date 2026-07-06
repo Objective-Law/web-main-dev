@@ -22,18 +22,16 @@
   {% assign has_carousel = true %}
 {% endif %}
 
-{% capture overlay_filter_css %}
-  {% if hero.overlay_filter %}
-    {% assign overlay_filter_string = hero.overlay_filter | strip %}
-    {% if overlay_filter_string contains "gradient(" or overlay_filter_string contains "rgb(" or overlay_filter_string contains "rgba(" or overlay_filter_string contains "#" or overlay_filter_string contains "var(" %}
-      {{ overlay_filter_string }}
-    {% else %}
-      rgba(0, 0, 0, {{ overlay_filter_string }})
-    {% endif %}
+{% assign overlay_filter_css = "transparent" %}
+{% assign overlay_filter_string = hero.overlay_filter | default: "" | strip %}
+{% assign overlay_filter_normalized = overlay_filter_string | downcase %}
+{% unless overlay_filter_string == "" or overlay_filter_normalized == "false" or overlay_filter_normalized == "none" or overlay_filter_normalized == "transparent" %}
+  {% if overlay_filter_string contains "gradient(" or overlay_filter_string contains "rgb(" or overlay_filter_string contains "rgba(" or overlay_filter_string contains "#" or overlay_filter_string contains "var(" %}
+    {% assign overlay_filter_css = overlay_filter_string %}
   {% else %}
-    transparent
+    {% capture overlay_filter_css %}rgba(0, 0, 0, {{ overlay_filter_string }}){% endcapture %}
   {% endif %}
-{% endcapture %}
+{% endunless %}
 
 {% assign is_resource_page = false %}
 {% if page.collection == "resources" %}
@@ -45,7 +43,7 @@
     class="page__hero--overlay oli-overlay {% if has_carousel %}oli-overlay-carousel{% else %}oli-overlay-hero{% endif %}{% if is_resource_page %} oli-overlay--resource{% endif %}"
     {% if overlay_image_count > 0 %}data-oli-overlay{% endif %}
     {% if has_carousel %}data-oli-overlay-carousel data-oli-overlay-interval="{{ hero.overlay_interval | default: 4200 }}"{% endif %}
-    style="--oli-overlay-base-color: {{ hero.overlay_color | default: '#111111' }}; --oli-overlay-filter: {{ overlay_filter_css | strip }}; --oli-overlay-title-width: {{ overlay_title_width }}; --oli-overlay-title-mobile-width: {{ mobile_overlay_title_width }};"
+    style="--oli-overlay-base-color: {{ hero.overlay_color | default: '#071A3D' }}; --oli-overlay-filter: {{ overlay_filter_css | strip }}; --oli-overlay-title-width: {{ overlay_title_width }}; --oli-overlay-title-mobile-width: {{ mobile_overlay_title_width }};"
   >
     {% if overlay_image_count > 0 %}
       <div class="oli-overlay-viewport" aria-hidden="true">

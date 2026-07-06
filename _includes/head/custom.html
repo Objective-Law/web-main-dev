@@ -1,6 +1,21 @@
 <!-- start custom head snippets -->
 
-<meta name="theme-color" content="#111111">
-<link rel="icon" href="{{ '/assets/images/oli/oli-logo-placeholder.svg' | relative_url }}" type="image/svg+xml">
+<meta name="theme-color" content="#071A3D">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | relative_url }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | relative_url }}">
+<link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+
+{%- assign google_analytics_id = site.google_analytics | default: "" | strip -%}
+{% if google_analytics_id != "" and page.analytics != false %}
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ google_analytics_id }}');
+  </script>
+{% endif %}
 
 <!-- end custom head snippets -->

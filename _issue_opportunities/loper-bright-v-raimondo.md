@@ -1,7 +1,7 @@
 ---
 title: "Loper Bright Enterprises v. Raimondo"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 90
 status: decided
 featured_home: true
@@ -53,4 +53,4 @@ With support, OLI can develop standing frameworks for post-Chevron litigation an
 
 ## Clarification
 
-This page is not an argument that agencies have no legitimate role. It is an argument that legal meaning must remain subject to independent judicial judgment.
+OLI's concern is not that administrative agencies have no legitimate role. The principle is that legal meaning belongs to law, not to agency preference, and courts must exercise independent judgment when interpreting statutes.

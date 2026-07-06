@@ -1,23 +1,54 @@
 :root {
-  --oli-ink: #111111;
-  --oli-charcoal: #202020;
-  --oli-paper: #f8f8f5;
-  --oli-white: #ffffff;
-  --oli-line: #d7d2c7;
-  --oli-burgundy: #5a1626;
-  --oli-burgundy-dark: #3d0f1a;
-  --oli-gold: #a58644;
-  --oli-muted: #62605a;
+  --oli-navy: #071a3d;
+  --oli-ivory: #f4f0e8;
+  --oli-black: #111318;
+  --oli-gold: #c89a3b;
+  --oli-red: #e64136;
+  --oli-cyan: #21c7e8;
+  --oli-yellow: #f0d33c;
+  --oli-blue: #4c69c8;
+  --oli-green: #6e7e2f;
+  --oli-coral: #f58c8a;
+
+  --oli-paper: var(--oli-ivory);
+  --oli-ink: var(--oli-black);
+  --oli-primary: var(--oli-navy);
+  --oli-accent: var(--oli-gold);
+  --oli-action: var(--oli-red);
+  --oli-modern-accent: var(--oli-cyan);
+
+  --oli-charcoal: #292c34;
+  --oli-white: #fffdfa;
+  --oli-line: rgba(7, 26, 61, 0.18);
+  --oli-muted: #5d626d;
+  --oli-navy-deep: #03122d;
+  --oli-shadow: rgba(7, 26, 61, 0.12);
+  --oli-hero-text-outline: rgba(7, 26, 61, 0.78); /* derived from --oli-navy */
+  --oli-hero-text-shadow: rgba(7, 26, 61, 0.58); /* derived from --oli-navy */
+  --oli-masthead-offset: 84px;
+
+  /* Compatibility aliases for existing OLI component selectors. */
+  --oli-burgundy: var(--oli-navy);
+  --oli-burgundy-dark: var(--oli-navy-deep);
+
+  --oli-font-display: Georgia, Cambria, "Times New Roman", Times, serif;
+  --oli-font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --oli-font-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body {
   color: var(--oli-ink);
   background: var(--oli-paper);
+  font-family: var(--oli-font-body);
 }
 
 html,
 body {
   overflow-x: hidden;
+}
+
+html {
+  scroll-padding-top: calc(var(--oli-masthead-offset, 84px) + 24px);
 }
 
 @supports (overflow-x: clip) {
@@ -28,26 +59,201 @@ body {
 }
 
 a {
-  color: var(--oli-burgundy);
+  color: var(--oli-primary);
+  text-decoration-color: rgba(200, 154, 59, 0.7);
+  text-underline-offset: 0.16em;
 }
 
 a:visited,
 .page__content a:visited {
-  color: var(--oli-burgundy);
+  color: var(--oli-primary);
+}
+
+a:hover,
+a:focus {
+  color: var(--oli-action);
+  text-decoration-color: currentColor;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--oli-font-ui);
+}
+
+::selection {
+  background: var(--oli-gold);
+  color: var(--oli-primary);
+}
+
+.page__content h1[id],
+.page__content h2[id],
+.page__content h3[id],
+.page__content h4[id],
+.page__content h5[id],
+.page__content h6[id] {
+  scroll-margin-top: calc(var(--oli-masthead-offset, 84px) + 24px);
+}
+
+.page__content .header-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4em;
+  margin-left: 0.35em;
+  color: inherit;
+  text-decoration: none;
+}
+
+.page__content .header-link:focus,
+.page__content .header-link:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid rgba(200, 154, 59, 0.7);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.page__content .header-link .sr-only {
+  display: none;
+}
+
+.page__content .header-link.is-copied {
+  color: var(--oli-gold);
+}
+
+.page__content .header-link .oli-permalink-toast {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 0.5rem);
+  z-index: 5;
+  padding: 0.22rem 0.5rem;
+  border-radius: 999px;
+  background: var(--oli-primary);
+  color: var(--oli-ivory);
+  font-family: var(--oli-font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-50%) translateX(-0.2rem);
+  pointer-events: none;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.page__content .header-link.is-copied .oli-permalink-toast {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 768px), (hover: none), (pointer: coarse) {
+  .header-link,
+  .page__content h1 .header-link,
+  .page__content h2 .header-link,
+  .page__content h3 .header-link,
+  .page__content h4 .header-link,
+  .page__content h5 .header-link,
+  .page__content h6 .header-link {
+    opacity: 1 !important;
+  }
+}
+
+.page__title,
+.page__content > h1 {
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
 }
 
 .masthead {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  border-top: 0;
+  border-bottom: 1px solid rgba(7, 26, 61, 0.16);
   background: var(--oli-paper);
-  border-bottom: 1px solid rgba(17, 17, 17, 0.16);
+  box-shadow: 0 4px 14px rgba(7, 26, 61, 0.06);
 }
 
 .masthead__inner-wrap,
 .greedy-nav {
-  background: var(--oli-paper);
+  background: transparent;
+}
+
+.masthead__inner-wrap {
+  max-width: 1200px;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
 }
 
 .site-logo img {
   max-height: 2.25rem;
+}
+
+.greedy-nav a.site-title,
+.site-title {
+  margin-left: 0;
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+
+.greedy-nav .visible-links a {
+  margin: 0 0.8rem;
+  padding: 0.55rem 0 0.45rem;
+  color: var(--oli-primary);
+  font-family: var(--oli-font-ui);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.065em;
+  text-transform: uppercase;
+}
+
+.greedy-nav .visible-links a::before {
+  height: 2px;
+  background: linear-gradient(90deg, var(--oli-gold), var(--oli-red));
+}
+
+.greedy-nav .visible-links a:hover,
+.greedy-nav .visible-links a:focus {
+  color: var(--oli-action);
+}
+
+.greedy-nav .hidden-links {
+  border-color: var(--oli-line);
+  background: var(--oli-white);
+  box-shadow: 0 18px 42px rgba(7, 26, 61, 0.15);
+}
+
+.greedy-nav .hidden-links::before {
+  border-color: var(--oli-line) transparent;
+}
+
+.greedy-nav .hidden-links::after {
+  border-color: var(--oli-white) transparent;
+}
+
+.greedy-nav .hidden-links a {
+  color: var(--oli-primary);
+  font-family: var(--oli-font-ui);
+}
+
+.greedy-nav .hidden-links a:hover,
+.greedy-nav .hidden-links a:focus {
+  background: rgba(7, 26, 61, 0.06);
+  color: var(--oli-action);
+}
+
+.greedy-nav__toggle,
+.search__toggle {
+  color: var(--oli-primary);
 }
 
 .page__hero--overlay.oli-overlay {
@@ -58,7 +264,8 @@ a:visited,
   min-height: 30rem;
   margin: 0 0 2.25rem;
   overflow: clip;
-  background-color: var(--oli-overlay-base-color, var(--oli-ink));
+  background-color: var(--oli-overlay-base-color, var(--oli-primary));
+  background-image: linear-gradient(135deg, var(--oli-primary) 0%, #0d2b5f 62%, var(--oli-black) 100%);
   color: #fff;
 }
 
@@ -67,7 +274,7 @@ a:visited,
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: var(--oli-overlay-filter, rgba(17, 17, 17, 0.72));
+  background: var(--oli-overlay-filter, transparent);
 }
 
 .oli-overlay .wrapper {
@@ -90,7 +297,7 @@ a:visited,
 
 .oli-overlay-viewport {
   z-index: 0;
-  background: var(--oli-overlay-base-color, var(--oli-ink));
+  background: var(--oli-overlay-base-color, var(--oli-primary));
 }
 
 .oli-overlay-slide {
@@ -109,9 +316,17 @@ a:visited,
   max-width: var(--oli-overlay-title-width, 100%);
   margin-bottom: 0.9rem;
   color: #fff;
+  font-family: var(--oli-font-display);
   font-size: 4rem;
-  line-height: 0.95;
-  text-shadow: 0 10px 32px rgba(17, 17, 17, 0.34);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  text-shadow:
+    -1px -1px 0 var(--oli-hero-text-outline),
+    1px -1px 0 var(--oli-hero-text-outline),
+    -1px 1px 0 var(--oli-hero-text-outline),
+    1px 1px 0 var(--oli-hero-text-outline),
+    0 3px 10px var(--oli-hero-text-shadow);
 }
 
 .oli-overlay .page__lead {
@@ -120,16 +335,28 @@ a:visited,
   color: rgba(255, 255, 255, 0.94);
   font-size: 1.18rem;
   line-height: 1.7;
-  text-shadow: 0 6px 22px rgba(17, 17, 17, 0.24);
+  text-shadow:
+    0 1px 2px var(--oli-hero-text-outline),
+    0 3px 10px var(--oli-hero-text-shadow);
 }
 
 .oli-kicker {
   margin: 0 0 0.95rem;
-  color: rgba(255, 242, 205, 0.9);
+  color: #f1d99f;
+  font-family: var(--oli-font-ui);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.oli-overlay .oli-kicker,
+.oli-overlay .oli-resource-page__meta,
+.oli-overlay .oli-page-share,
+.oli-overlay .oli-button--overlay {
+  text-shadow:
+    0 1px 2px var(--oli-hero-text-outline),
+    0 3px 8px var(--oli-hero-text-shadow);
 }
 
 .page__hero-actions {
@@ -146,12 +373,18 @@ a:visited,
   justify-content: center;
   min-height: 2.6rem;
   padding: 0.65rem 1rem;
-  border: 1px solid var(--oli-burgundy);
-  border-radius: 6px;
-  background: var(--oli-burgundy);
-  color: #fff;
-  font-weight: 700;
+  border: 1px solid var(--oli-primary);
+  border-radius: 3px;
+  background: var(--oli-primary);
+  box-shadow: inset 3px 0 0 var(--oli-gold), 0 8px 20px rgba(7, 26, 61, 0.12);
+  color: var(--oli-ivory);
+  font-family: var(--oli-font-ui);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
   text-decoration: none;
+  text-transform: uppercase;
+  transition: transform 150ms ease, background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .oli-button:visited,
@@ -160,48 +393,64 @@ a:visited,
 .page__content a.oli-button:visited,
 a.oli-button,
 a.oli-button:visited {
-  color: #fff;
+  color: var(--oli-ivory);
   text-decoration: none;
 }
 
 .oli-button:hover,
 .btn.oli-button:hover,
 .page__content a.oli-button:hover {
-  background: var(--oli-burgundy-dark);
-  color: #fff;
+  border-color: var(--oli-navy-deep);
+  background: var(--oli-navy-deep);
+  box-shadow: inset 3px 0 0 var(--oli-cyan), 0 12px 24px rgba(7, 26, 61, 0.18);
+  color: var(--oli-ivory);
   text-decoration: none;
+  transform: translateY(-1px);
 }
 
 .oli-button--secondary,
 .btn.oli-button--secondary {
-  background: transparent;
-  color: var(--oli-burgundy);
+  border-color: rgba(7, 26, 61, 0.5);
+  background: rgba(255, 253, 250, 0.66);
+  box-shadow: none;
+  color: var(--oli-primary);
 }
 
 .oli-button--secondary:visited,
 .btn.oli-button--secondary:visited,
 .page__content a.oli-button--secondary,
 .page__content a.oli-button--secondary:visited {
-  color: var(--oli-burgundy);
+  color: var(--oli-primary);
 }
 
 .oli-button--secondary:hover,
 .btn.oli-button--secondary:hover,
 .page__content a.oli-button--secondary:hover {
-  background: rgba(90, 22, 38, 0.08);
-  color: var(--oli-burgundy-dark);
+  border-color: var(--oli-primary);
+  background: rgba(7, 26, 61, 0.07);
+  color: var(--oli-primary);
 }
 
 .oli-button--overlay,
 .btn.oli-button--overlay {
-  border-color: rgba(255, 255, 255, 0.78);
-  color: #fff;
+  border-color: rgba(244, 240, 232, 0.76);
+  background: rgba(7, 26, 61, 0.58);
+  box-shadow: none;
+  color: var(--oli-ivory);
 }
 
 .oli-button--overlay:hover,
 .btn.oli-button--overlay:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: #fff;
+  border-color: var(--oli-ivory);
+  background: rgba(7, 26, 61, 0.88);
+  box-shadow: none;
+  color: var(--oli-ivory);
+}
+
+.oli-button:focus-visible,
+.btn.oli-button:focus-visible {
+  outline: 3px solid var(--oli-gold);
+  outline-offset: 3px;
 }
 
 .oli-home {
@@ -260,12 +509,13 @@ a.oli-button:visited {
   margin: 0 0 1.1rem;
   padding-top: 0.9rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.14);
-  color: var(--oli-ink, #171717);
-  font-size: 1.75rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  border-bottom: 1px solid rgba(7, 26, 61, 0.16);
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  line-height: 1.16;
 }
 
 .layout--single.wide .page__content > h2::before,
@@ -275,10 +525,9 @@ a.oli-button:visited {
   position: absolute;
   top: 0;
   left: 0;
-  width: 4.5rem;
-  height: 4px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--oli-burgundy, #6f1d2f), var(--oli-gold, #b58a3a));
+  width: 5rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--oli-gold) 0 72%, var(--oli-red) 72% 86%, var(--oli-cyan) 86%);
 }
 
 .layout--single.wide .page__content > h2 {
@@ -294,8 +543,9 @@ a.oli-button:visited {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   padding-left: 0.8rem;
-  border-left: 3px solid rgba(111, 29, 47, 0.35);
-  color: var(--oli-ink, #171717);
+  border-left: 3px solid var(--oli-gold);
+  color: var(--oli-primary);
+  font-family: var(--oli-font-ui);
   font-size: 1.22rem;
   font-weight: 800;
   line-height: 1.25;
@@ -308,7 +558,8 @@ a.oli-button:visited {
 .oli-card__eyebrow,
 .oli-resource-card__eyebrow {
   margin: 0 0 0.55rem;
-  color: var(--oli-burgundy);
+  color: var(--oli-action);
+  font-family: var(--oli-font-ui);
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -318,7 +569,7 @@ a.oli-button:visited {
 .oli-section__lead {
   max-width: none;
   margin-top: 0;
-  color: rgba(17, 17, 17, 0.76);
+  color: rgba(17, 19, 24, 0.76);
   font-size: 1.08rem;
   line-height: 1.65;
 }
@@ -343,9 +594,10 @@ a.oli-button:visited {
 .oli-resource-card,
 .oli-status-notice,
 .oli-video-placeholder {
-  border: 1px solid var(--oli-line);
-  border-radius: 8px;
+  border: 1px solid rgba(7, 26, 61, 0.16);
+  border-radius: 3px;
   background: var(--oli-white);
+  box-shadow: 0 14px 34px rgba(7, 26, 61, 0.07);
 }
 
 .oli-card,
@@ -359,10 +611,18 @@ a.oli-button:visited {
 .oli-panel h2,
 .oli-panel h3 {
   margin-top: 0;
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
+}
+
+.oli-team-member h3 {
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
 }
 
 .oli-panel--accent {
-  border-left: 4px solid var(--oli-burgundy);
+  border-top: 3px solid var(--oli-gold);
+  border-left: 1px solid rgba(7, 26, 61, 0.16);
 }
 
 .oli-actions {
@@ -379,11 +639,12 @@ a.oli-button:visited {
   align-items: stretch;
   min-height: 2.6rem;
   overflow: hidden;
-  border: 1px solid rgba(90, 22, 38, 0.34);
-  border-radius: 0.95rem;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--oli-burgundy-dark);
-  box-shadow: 0 10px 26px rgba(17, 17, 17, 0.07);
+  border: 1px solid rgba(7, 26, 61, 0.38);
+  border-radius: 3px;
+  background: rgba(255, 253, 250, 0.92);
+  color: var(--oli-primary);
+  box-shadow: 0 10px 26px rgba(7, 26, 61, 0.09);
+  font-family: var(--oli-font-ui);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.11em;
@@ -402,7 +663,7 @@ a.oli-button:visited {
 .page__content .double-icon-button,
 .page__content .double-icon-button:visited,
 .page__content .double-icon-button:active {
-  color: var(--oli-burgundy-dark);
+  color: var(--oli-primary);
   text-decoration: none !important;
 }
 
@@ -414,9 +675,9 @@ a.oli-button:visited {
   align-self: stretch;
   flex: 0 0 var(--double-icon-button-segment-size);
   width: var(--double-icon-button-segment-size);
-  border-left: 1px solid rgba(90, 22, 38, 0.22);
-  background: rgba(165, 134, 68, 0.13);
-  color: var(--oli-burgundy);
+  border-left: 1px solid rgba(7, 26, 61, 0.22);
+  background: var(--oli-primary);
+  color: var(--oli-ivory);
   font-size: 1rem;
   line-height: 1;
 }
@@ -508,12 +769,12 @@ a.oli-button:visited {
   width: var(--double-icon-button-segment-size);
   margin-right: 0;
   margin-left: 0;
-  color: var(--oli-burgundy);
+  color: var(--oli-primary);
 }
 
 .double-icon-button--left-tint .double-icon-button__lead {
-  border-right: 1px solid rgba(90, 22, 38, 0.22);
-  background: rgba(165, 134, 68, 0.13);
+  border-right: 1px solid rgba(7, 26, 61, 0.2);
+  background: rgba(200, 154, 59, 0.18);
 }
 
 .double-icon-button__lead i,
@@ -536,14 +797,14 @@ a.oli-button:visited {
   justify-content: center;
   flex: 0 0 var(--double-icon-button-segment-size);
   width: var(--double-icon-button-segment-size);
-  color: var(--oli-burgundy);
+  color: var(--oli-ivory);
   font-size: 0.92rem;
   line-height: 1;
 }
 
 .double-icon-button--right-tint .double-icon-button__aside {
-  border-left: 1px solid rgba(90, 22, 38, 0.22);
-  background: rgba(165, 134, 68, 0.13);
+  border-left: 1px solid rgba(7, 26, 61, 0.22);
+  background: var(--oli-primary);
 }
 
 .double-icon-button:hover,
@@ -552,17 +813,17 @@ a.oli-button:visited {
 .page__content .double-icon-button:hover,
 .page__content .double-icon-button:focus,
 .page__content .double-icon-button:focus-visible {
-  border-color: rgba(90, 22, 38, 0.64);
-  background: #ffffff;
-  color: var(--oli-burgundy-dark);
-  box-shadow: 0 16px 30px rgba(17, 17, 17, 0.11);
+  border-color: var(--oli-primary);
+  background: var(--oli-white);
+  color: var(--oli-primary);
+  box-shadow: 0 16px 30px rgba(7, 26, 61, 0.15);
   text-decoration: none !important;
   transform: translateY(-2px);
 }
 
 .double-icon-button:focus-visible,
 .page__content .double-icon-button:focus-visible {
-  outline: 3px solid rgba(165, 134, 68, 0.45);
+  outline: 3px solid rgba(200, 154, 59, 0.62);
   outline-offset: 3px;
 }
 
@@ -577,7 +838,7 @@ a.oli-button:visited {
 .oli-issue-list li {
   padding: 1rem;
   border-top: 3px solid var(--oli-gold);
-  background: #fff;
+  background: var(--oli-white);
 }
 
 .oli-issue-opportunities {
@@ -592,20 +853,20 @@ a.oli-button:visited {
   display: block;
   height: 100%;
   overflow: hidden;
-  border: 1px solid rgba(90, 22, 38, 0.16);
-  border-radius: 0.85rem;
-  background: #fff;
+  border: 1px solid rgba(7, 26, 61, 0.16);
+  border-radius: 3px;
+  background: var(--oli-white);
   color: inherit;
   text-decoration: none;
-  box-shadow: 0 0.5rem 1.5rem rgba(17, 17, 17, 0.06);
+  box-shadow: 0 0.5rem 1.5rem rgba(7, 26, 61, 0.07);
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 
 .oli-issue-card::before {
   content: "";
   display: block;
-  height: 4px;
-  background: linear-gradient(90deg, var(--oli-burgundy), var(--oli-gold));
+  height: 3px;
+  background: linear-gradient(90deg, var(--oli-gold) 0 70%, var(--oli-red) 70% 84%, var(--oli-cyan) 84%);
 }
 
 .oli-issue-card,
@@ -622,15 +883,15 @@ a.oli-button:visited {
 .page__content a.oli-issue-card:hover,
 .page__content a.oli-issue-card:focus,
 .page__content a.oli-issue-card:focus-visible {
-  border-color: rgba(90, 22, 38, 0.35);
+  border-color: rgba(7, 26, 61, 0.44);
   color: inherit;
   text-decoration: none;
   transform: translateY(-3px);
-  box-shadow: 0 0.85rem 2rem rgba(17, 17, 17, 0.1);
+  box-shadow: 0 0.85rem 2rem rgba(7, 26, 61, 0.13);
 }
 
 .oli-issue-card:focus-visible {
-  outline: 3px solid rgba(90, 22, 38, 0.35);
+  outline: 3px solid rgba(200, 154, 59, 0.56);
   outline-offset: 3px;
 }
 
@@ -640,7 +901,8 @@ a.oli-button:visited {
 
 .oli-issue-card__eyebrow {
   margin: 0 0 0.65rem;
-  color: var(--oli-burgundy);
+  color: var(--oli-action);
+  font-family: var(--oli-font-ui);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -649,7 +911,8 @@ a.oli-button:visited {
 
 .oli-issue-card__title {
   margin: 0;
-  color: var(--oli-ink);
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
   font-size: 1.25rem;
   line-height: 1.18;
   letter-spacing: -0.015em;
@@ -657,7 +920,7 @@ a.oli-button:visited {
 
 .oli-issue-card__summary {
   margin: 1rem 0 0;
-  color: rgba(17, 17, 17, 0.78);
+  color: rgba(17, 19, 24, 0.78);
   font-size: 0.98rem;
   line-height: 1.6;
 }
@@ -675,15 +938,15 @@ a.oli-button:visited {
   max-width: 1120px;
   margin: 0 auto 2rem;
   padding: 1.1rem 1.25rem;
-  border: 1px solid rgba(111, 29, 47, 0.18);
-  border-left: 4px solid var(--oli-burgundy);
-  border-radius: 0.75rem;
-  background: rgba(111, 29, 47, 0.035);
+  border: 1px solid rgba(7, 26, 61, 0.18);
+  border-left: 4px solid var(--oli-gold);
+  border-radius: 3px;
+  background: rgba(200, 154, 59, 0.08);
 }
 
 .oli-issue-status__label {
   margin: 0 0 0.35rem;
-  color: var(--oli-burgundy);
+  color: var(--oli-action);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -693,6 +956,8 @@ a.oli-button:visited {
 .oli-issue-status__heading {
   margin: 0 0 0.4rem;
   font-size: 1.15rem;
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
   line-height: 1.25;
 }
 
@@ -719,13 +984,15 @@ a.oli-button:visited {
   place-items: center;
   border: 1px solid var(--oli-line);
   border-radius: 50%;
-  color: var(--oli-burgundy);
+  border-color: rgba(7, 26, 61, 0.24);
+  color: var(--oli-primary);
   font-size: 1.5rem;
 }
 
 .oli-status-notice {
   color: var(--oli-charcoal);
-  background: #fbfaf6;
+  border-left: 4px solid var(--oli-gold);
+  background: rgba(255, 253, 250, 0.86);
 }
 
 .oli-footer-legal {
@@ -764,17 +1031,24 @@ a.oli-button:visited {
 .oli-faq-item {
   padding: 1rem;
   border: 1px solid var(--oli-line);
-  border-radius: 8px;
-  background: #fff;
+  border-radius: 3px;
+  background: var(--oli-white);
 }
 
 .oli-faq-item h3 {
   margin-top: 0;
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
 }
 
 .oli-resource-browser {
   display: grid;
   gap: 1.25rem;
+}
+
+.oli-resource-introduction p:last-child,
+.oli-resource-empty p:last-child {
+  margin-bottom: 0;
 }
 
 .oli-resource-filters {
@@ -786,7 +1060,7 @@ a.oli-button:visited {
 .oli-resource-filter {
   border: 1px solid var(--oli-line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--oli-white);
   color: var(--oli-charcoal);
   cursor: pointer;
   font-weight: 700;
@@ -794,9 +1068,20 @@ a.oli-button:visited {
 }
 
 .oli-resource-filter.is-active {
-  border-color: var(--oli-burgundy);
-  background: var(--oli-burgundy);
-  color: #fff;
+  border-color: var(--oli-primary);
+  background: var(--oli-primary);
+  color: var(--oli-ivory);
+}
+
+.oli-resource-filter:hover,
+.oli-resource-filter:focus-visible {
+  border-color: var(--oli-gold);
+  color: var(--oli-primary);
+}
+
+.oli-resource-filter:focus-visible {
+  outline: 3px solid rgba(200, 154, 59, 0.46);
+  outline-offset: 2px;
 }
 
 .oli-resource-grid {
@@ -813,7 +1098,8 @@ a.oli-button:visited {
   padding: 1.15rem 1.2rem;
   color: var(--oli-ink);
   text-decoration: none;
-  box-shadow: 0 16px 38px rgba(17, 17, 17, 0.06);
+  border-left: 3px solid var(--oli-gold);
+  box-shadow: 0 16px 38px rgba(7, 26, 61, 0.07);
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 
@@ -873,8 +1159,9 @@ a.oli-issue-opportunity-card:focus-visible *,
 .oli-issue-opportunity-card:focus-visible {
   color: var(--oli-ink);
   transform: translateY(-2px);
-  border-color: rgba(90, 22, 38, 0.45);
-  box-shadow: 0 0 0 3px rgba(90, 22, 38, 0.1), 0 20px 40px rgba(17, 17, 17, 0.09);
+  border-color: rgba(7, 26, 61, 0.4);
+  border-left-color: var(--oli-cyan);
+  box-shadow: 0 0 0 3px rgba(200, 154, 59, 0.12), 0 20px 40px rgba(7, 26, 61, 0.11);
   text-decoration: none;
 }
 
@@ -890,9 +1177,9 @@ a.oli-issue-opportunity-card:focus-visible *,
   overflow: hidden;
   width: 100%;
   margin-bottom: 0.2rem;
-  border-radius: 8px;
+  border-radius: 2px;
   aspect-ratio: 16 / 10;
-  background: #eeeae0;
+  background: #e9e4da;
 }
 
 .oli-resource-card__thumbnail img {
@@ -924,7 +1211,7 @@ a.oli-issue-opportunity-card:focus-visible *,
 
 .oli-resource-card__meta-item i {
   width: 1rem;
-  color: var(--oli-burgundy);
+  color: var(--oli-gold);
   text-align: center;
 }
 
@@ -935,7 +1222,8 @@ a.oli-issue-opportunity-card:focus-visible *,
 
 .oli-resource-card__title {
   margin: 0;
-  color: var(--oli-ink);
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
   font-size: 1.35rem;
   line-height: 1.18;
 }
@@ -947,7 +1235,7 @@ a.oli-issue-opportunity-card:focus-visible *,
 }
 
 a.oli-resource-card .oli-resource-card__title {
-  color: var(--oli-ink);
+  color: var(--oli-primary);
 }
 
 a.oli-resource-card .oli-resource-card__summary {
@@ -963,11 +1251,11 @@ a.oli-resource-card .oli-resource-card__eyebrow {
 }
 
 a.oli-resource-card .oli-publication-status {
-  color: var(--oli-burgundy-dark);
+  color: var(--oli-primary);
 }
 
 a.oli-resource-card .oli-taxonomy-pill {
-  color: var(--oli-burgundy);
+  color: var(--oli-primary);
 }
 
 .oli-taxonomy-pills {
@@ -981,10 +1269,10 @@ a.oli-resource-card .oli-taxonomy-pill {
   display: inline-flex;
   align-items: center;
   padding: 0.32rem 0.65rem;
-  border: 1px solid rgba(90, 22, 38, 0.24);
+  border: 1px solid rgba(7, 26, 61, 0.22);
   border-radius: 999px;
-  background: rgba(90, 22, 38, 0.08);
-  color: var(--oli-burgundy);
+  background: rgba(76, 105, 200, 0.08);
+  color: var(--oli-primary);
   font-size: 0.77rem;
   line-height: 1.2;
   text-decoration: none;
@@ -1059,7 +1347,7 @@ a.oli-resource-card .oli-taxonomy-pill {
 }
 
 .oli-resource-page__meta i {
-  color: var(--oli-burgundy);
+  color: var(--oli-gold);
 }
 
 .oli-overlay--resource .oli-resource-page__status-row {
@@ -1111,10 +1399,10 @@ a.oli-resource-card .oli-taxonomy-pill {
   display: inline-flex;
   align-items: center;
   width: fit-content;
-  border: 1px solid rgba(90, 22, 38, 0.2);
+  border: 1px solid rgba(200, 154, 59, 0.46);
   border-radius: 999px;
-  background: rgba(165, 134, 68, 0.14);
-  color: var(--oli-burgundy-dark);
+  background: rgba(200, 154, 59, 0.14);
+  color: var(--oli-primary);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -1134,7 +1422,7 @@ a.oli-resource-card .oli-taxonomy-pill {
   border: 1px solid var(--oli-line);
   border-radius: 999px;
   padding: 0.15rem 0.5rem;
-  color: var(--oli-burgundy);
+  color: var(--oli-primary);
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1154,9 +1442,9 @@ a.oli-resource-card .oli-taxonomy-pill {
 }
 
 .oli-annotation--glossary {
-  border-bottom: 1px dotted rgba(90, 22, 38, 0.58);
+  border-bottom: 1px dotted rgba(7, 26, 61, 0.58);
   border-radius: 0.3rem;
-  color: var(--oli-burgundy);
+  color: var(--oli-primary);
   padding: 0.02em 0.08em;
   text-decoration: none;
   transition: color 120ms ease, border-color 120ms ease, background-color 120ms ease;
@@ -1170,19 +1458,19 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-annotation--glossary:focus,
 .oli-annotation--glossary:focus-visible,
 .oli-annotation--glossary[data-open="true"] {
-  border-color: rgba(90, 22, 38, 0.88);
-  background: rgba(165, 134, 68, 0.16);
-  color: var(--oli-burgundy-dark);
+  border-color: rgba(7, 26, 61, 0.88);
+  background: rgba(200, 154, 59, 0.18);
+  color: var(--oli-primary);
 }
 
 .oli-annotation--citation {
-  color: var(--oli-burgundy);
+  color: var(--oli-action);
   white-space: nowrap;
 }
 
 .oli-citation-marker {
   display: inline-block;
-  color: var(--oli-burgundy);
+  color: var(--oli-action);
   font-size: 0.76em;
   font-weight: 800;
   line-height: 1;
@@ -1193,7 +1481,7 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-annotation--citation:focus .oli-citation-marker,
 .oli-annotation--citation:focus-visible .oli-citation-marker,
 .oli-annotation--citation[data-open="true"] .oli-citation-marker {
-  color: var(--oli-burgundy-dark);
+  color: var(--oli-primary);
 }
 
 .oli-annotation-layer {
@@ -1233,10 +1521,10 @@ a.oli-resource-card .oli-taxonomy-pill {
   position: relative;
   display: block;
   padding: 0.95rem 1rem 1rem;
-  border: 1px solid rgba(90, 22, 38, 0.18);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 18px 40px rgba(17, 17, 17, 0.14), 0 2px 8px rgba(17, 17, 17, 0.05);
+  border: 1px solid rgba(7, 26, 61, 0.2);
+  border-radius: 3px;
+  background: rgba(255, 253, 250, 0.98);
+  box-shadow: 0 18px 40px rgba(7, 26, 61, 0.15), 0 2px 8px rgba(7, 26, 61, 0.06);
   color: var(--oli-charcoal);
   font-style: normal;
   font-weight: 400;
@@ -1259,9 +1547,9 @@ a.oli-resource-card .oli-taxonomy-pill {
   left: calc(var(--oli-annotation-pointer, 50%) - 0.45rem);
   width: 0.9rem;
   height: 0.9rem;
-  border-top: 1px solid rgba(90, 22, 38, 0.18);
-  border-left: 1px solid rgba(90, 22, 38, 0.18);
-  background: rgba(255, 255, 255, 0.98);
+  border-top: 1px solid rgba(7, 26, 61, 0.2);
+  border-left: 1px solid rgba(7, 26, 61, 0.2);
+  background: rgba(255, 253, 250, 0.98);
   transform: rotate(45deg);
 }
 
@@ -1269,8 +1557,8 @@ a.oli-resource-card .oli-taxonomy-pill {
   top: auto;
   bottom: -0.35rem;
   border: 0;
-  border-right: 1px solid rgba(90, 22, 38, 0.18);
-  border-bottom: 1px solid rgba(90, 22, 38, 0.18);
+  border-right: 1px solid rgba(7, 26, 61, 0.2);
+  border-bottom: 1px solid rgba(7, 26, 61, 0.2);
 }
 
 .oli-annotation__eyebrow,
@@ -1291,7 +1579,8 @@ a.oli-resource-card .oli-taxonomy-pill {
 
 .oli-annotation__heading {
   margin: 0 2rem 0.55rem 0;
-  color: var(--oli-ink);
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
   font-size: 1rem;
   font-weight: 800;
   line-height: 1.3;
@@ -1325,9 +1614,9 @@ a.oli-resource-card .oli-taxonomy-pill {
   width: 2rem;
   height: 2rem;
   padding: 0;
-  border: 1px solid rgba(90, 22, 38, 0.16);
+  border: 1px solid rgba(7, 26, 61, 0.18);
   border-radius: 999px;
-  background: #fff;
+  background: var(--oli-white);
   color: var(--oli-muted);
   box-shadow: none;
 }
@@ -1335,8 +1624,8 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-annotation__close:hover,
 .oli-annotation__close:focus,
 .oli-annotation__close:focus-visible {
-  background: rgba(90, 22, 38, 0.08);
-  color: var(--oli-burgundy);
+  background: rgba(7, 26, 61, 0.08);
+  color: var(--oli-primary);
 }
 
 .oli-annotation-popover {
@@ -1345,9 +1634,9 @@ a.oli-resource-card .oli-taxonomy-pill {
   width: 26rem;
   max-width: calc(100% - 2rem);
   border: 1px solid var(--oli-line);
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.22);
+  border-radius: 3px;
+  background: var(--oli-white);
+  box-shadow: 0 18px 44px rgba(7, 26, 61, 0.2);
   padding: 1rem;
 }
 
@@ -1357,7 +1646,7 @@ a.oli-resource-card .oli-taxonomy-pill {
 
 .oli-annotation-popover__eyebrow {
   margin: 0 0 0.25rem;
-  color: var(--oli-burgundy);
+  color: var(--oli-action);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1414,7 +1703,7 @@ a.oli-resource-card .oli-taxonomy-pill {
   min-height: 2.25rem;
   border: 1px solid var(--oli-line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--oli-white);
   color: var(--oli-charcoal);
   cursor: pointer;
   padding: 0.4rem 0.7rem;
@@ -1432,8 +1721,8 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-share__button:hover,
 .oli-share__link:hover,
 .page__content .oli-share__link:hover {
-  border-color: var(--oli-burgundy);
-  color: var(--oli-burgundy);
+  border-color: var(--oli-gold);
+  color: var(--oli-primary);
   text-decoration: none;
 }
 
@@ -1509,7 +1798,7 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-page-share__link:focus-visible,
 .oli-page-share__button:focus,
 .oli-page-share__button:focus-visible {
-  outline: 2px solid rgba(165, 134, 68, 0.42);
+  outline: 2px solid rgba(200, 154, 59, 0.58);
   outline-offset: 4px;
 }
 
@@ -1544,17 +1833,19 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-bibliography {
   margin: 2.5rem 0 0;
   padding: 1.35rem 1.4rem 1.1rem;
-  border: 1px solid rgba(90, 22, 38, 0.16);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 16px 34px rgba(17, 17, 17, 0.05);
+  border: 1px solid rgba(7, 26, 61, 0.16);
+  border-top: 3px solid var(--oli-gold);
+  border-radius: 3px;
+  background: rgba(255, 253, 250, 0.82);
+  box-shadow: 0 16px 34px rgba(7, 26, 61, 0.06);
 }
 
 .oli-bibliography::before {
   content: attr(data-bibliography-title);
   display: block;
   margin: 0 0 1rem;
-  color: var(--oli-ink);
+  color: var(--oli-primary);
+  font-family: var(--oli-font-display);
   font-size: 1.45rem;
   font-weight: 800;
   line-height: 1.2;
@@ -1572,7 +1863,7 @@ a.oli-resource-card .oli-taxonomy-pill {
   gap: 0.85rem;
   align-items: start;
   padding: 0.85rem 0;
-  border-top: 1px solid rgba(90, 22, 38, 0.12);
+  border-top: 1px solid rgba(7, 26, 61, 0.12);
 }
 
 .oli-bibliography__item:first-child {
@@ -1587,8 +1878,8 @@ a.oli-resource-card .oli-taxonomy-pill {
   min-width: 2.5rem;
   padding: 0.15rem 0.45rem;
   border-radius: 999px;
-  background: rgba(90, 22, 38, 0.1);
-  color: var(--oli-burgundy);
+  background: var(--oli-primary);
+  color: var(--oli-ivory);
   font-size: 0.8rem;
   font-weight: 800;
 }
@@ -1633,11 +1924,11 @@ a.oli-resource-card .oli-taxonomy-pill {
   width: 3.3rem;
   height: 3.3rem;
   padding: 0;
-  border: 1px solid rgba(90, 22, 38, 0.16);
+  border: 1px solid rgba(7, 26, 61, 0.18);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 14px 32px rgba(17, 17, 17, 0.14);
-  color: var(--oli-burgundy);
+  background: rgba(255, 253, 250, 0.96);
+  box-shadow: 0 14px 32px rgba(7, 26, 61, 0.14);
+  color: var(--oli-primary);
   backdrop-filter: blur(12px);
   transition:
     transform 180ms ease,
@@ -1650,10 +1941,10 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-toc-widget__toggle:focus,
 .oli-toc-widget__toggle:focus-visible {
   transform: translateY(-1px);
-  border-color: rgba(90, 22, 38, 0.32);
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 18px 36px rgba(17, 17, 17, 0.18);
-  color: var(--oli-burgundy-dark);
+  border-color: var(--oli-gold);
+  background: var(--oli-white);
+  box-shadow: 0 18px 36px rgba(7, 26, 61, 0.18);
+  color: var(--oli-primary);
 }
 
 .oli-toc-widget__toggle:focus,
@@ -1662,7 +1953,7 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-toc-widget__close:focus-visible,
 .oli-toc-widget__link:focus,
 .oli-toc-widget__link:focus-visible {
-  outline: 2px solid rgba(181, 138, 58, 0.46);
+  outline: 2px solid rgba(200, 154, 59, 0.58);
   outline-offset: 3px;
 }
 
@@ -1685,10 +1976,10 @@ a.oli-resource-card .oli-taxonomy-pill {
   max-height: min(32rem, calc(100vh - 7rem));
   overflow: hidden;
   box-sizing: border-box;
-  border: 1px solid rgba(90, 22, 38, 0.13);
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 24px 46px rgba(17, 17, 17, 0.18);
+  border: 1px solid rgba(7, 26, 61, 0.16);
+  border-radius: 3px;
+  background: rgba(255, 253, 250, 0.98);
+  box-shadow: 0 24px 46px rgba(7, 26, 61, 0.18);
   backdrop-filter: blur(18px);
 }
 
@@ -1703,12 +1994,13 @@ a.oli-resource-card .oli-taxonomy-pill {
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.9rem 0.95rem 0.75rem;
-  border-bottom: 1px solid rgba(90, 22, 38, 0.09);
+  border-bottom: 1px solid rgba(7, 26, 61, 0.1);
 }
 
 .oli-toc-widget__title {
   margin: 0;
-  color: var(--oli-ink);
+  color: var(--oli-primary);
+  font-family: var(--oli-font-ui);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -1724,7 +2016,7 @@ a.oli-resource-card .oli-taxonomy-pill {
   padding: 0;
   border: 0;
   border-radius: 999px;
-  background: rgba(17, 17, 17, 0.06);
+  background: rgba(7, 26, 61, 0.06);
   color: var(--oli-muted);
   font-size: 1.25rem;
   line-height: 1;
@@ -1733,8 +2025,8 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-toc-widget__close:hover,
 .oli-toc-widget__close:focus,
 .oli-toc-widget__close:focus-visible {
-  color: var(--oli-burgundy);
-  background: rgba(90, 22, 38, 0.1);
+  color: var(--oli-primary);
+  background: rgba(200, 154, 59, 0.16);
 }
 
 .oli-toc-widget__nav {
@@ -1759,6 +2051,7 @@ a.oli-resource-card .oli-taxonomy-pill {
   border-radius: 0.75rem;
   background: transparent;
   color: var(--oli-charcoal);
+  font-family: var(--oli-font-ui);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.35;
@@ -1772,13 +2065,13 @@ a.oli-resource-card .oli-taxonomy-pill {
 .oli-toc-widget__link:hover,
 .oli-toc-widget__link:focus,
 .oli-toc-widget__link:focus-visible {
-  background: rgba(90, 22, 38, 0.1);
-  color: var(--oli-burgundy);
+  background: rgba(7, 26, 61, 0.07);
+  color: var(--oli-primary);
 }
 
 .oli-toc-widget__link.is-active {
-  background: rgba(90, 22, 38, 0.12);
-  color: var(--oli-burgundy);
+  background: rgba(200, 154, 59, 0.18);
+  color: var(--oli-primary);
   font-weight: 800;
 }
 
@@ -1816,22 +2109,22 @@ body.oli-toc-widget--overlay-open {
 .oli-visual-media__tab {
   border: 1px solid var(--oli-line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--oli-white);
   cursor: pointer;
   font-weight: 700;
   padding: 0.5rem 0.85rem;
 }
 
 .oli-visual-media__tab[aria-selected="true"] {
-  border-color: var(--oli-burgundy);
-  background: var(--oli-burgundy);
-  color: #fff;
+  border-color: var(--oli-primary);
+  background: var(--oli-primary);
+  color: var(--oli-ivory);
 }
 
 .oli-visual-media__panel {
   border: 1px solid var(--oli-line);
-  border-radius: 8px;
-  background: #fff;
+  border-radius: 3px;
+  background: var(--oli-white);
   padding: 1rem;
 }
 
@@ -1867,11 +2160,11 @@ body.oli-toc-widget--overlay-open {
   display: grid;
   gap: 0.35rem;
   margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(244, 240, 232, 0.82);
 }
 
 .oli-footer-band a {
-  color: #fff;
+  color: var(--oli-ivory);
 }
 
 .oli-footer-band__status {
@@ -1880,10 +2173,77 @@ body.oli-toc-widget--overlay-open {
 }
 
 .oli-footer-band__credit {
+  color: var(--oli-gold);
   font-size: 0.82rem;
 }
 
+.page__footer {
+  position: relative;
+  margin-top: 4rem;
+  border-top: 4px solid var(--oli-gold);
+  background: var(--oli-primary);
+  color: rgba(244, 240, 232, 0.82);
+}
+
+.page__footer::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: 0;
+  width: 18%;
+  height: 4px;
+  background: var(--oli-cyan);
+}
+
+.page__footer footer {
+  max-width: 1200px;
+  font-family: var(--oli-font-ui);
+}
+
+.page__footer a,
+.page__footer a:visited,
+.page__footer-follow .social-icons a,
+.oli-footer-legal a,
+.oli-footer-legal a:visited {
+  color: var(--oli-ivory);
+}
+
+.page__footer a:hover,
+.page__footer a:focus,
+.page__footer-follow .social-icons a:hover,
+.oli-footer-legal a:hover {
+  color: var(--oli-gold);
+  text-decoration: none;
+}
+
+.page__footer .fas,
+.page__footer .fab,
+.page__footer .far,
+.page__footer .fal {
+  color: var(--oli-gold);
+}
+
+.page__footer-follow {
+  padding-top: 1rem;
+  border-top: 1px solid rgba(244, 240, 232, 0.16);
+}
+
+.page__footer-follow li {
+  font-family: var(--oli-font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+}
+
+.oli-footer-legal {
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(244, 240, 232, 0.12);
+}
+
 @media (max-width: 600px) {
+  :root {
+    --oli-masthead-offset: 72px;
+  }
+
   .layout--single.wide #main {
     width: calc(100% - 2rem);
   }
@@ -2035,5 +2395,455 @@ body.oli-toc-widget--overlay-open {
   .oli-visual-media__panel {
     border-color: #999;
     box-shadow: none;
+  }
+}
+
+
+/* OLI footer system -- consolidated */
+#footer.page__footer {
+  margin-top: 0 !important;
+  padding: 0 !important;
+  border-top: 4px solid var(--oli-gold);
+  background: var(--oli-primary);
+  color: rgba(244, 240, 232, 0.82);
+}
+
+#footer.page__footer::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: 0;
+  width: 18%;
+  height: 4px;
+  background: var(--oli-cyan);
+}
+
+#footer.page__footer > footer {
+  max-width: 1200px;
+  margin: 0 auto !important;
+  padding: 0.75rem clamp(1rem, 4vw, 2rem) 0.72rem !important;
+  font-family: var(--oli-font-ui);
+}
+
+#footer.page__footer p,
+#footer.page__footer ul,
+#footer.page__footer nav,
+#footer.page__footer .page__footer-copyright {
+  margin: 0 !important;
+}
+
+#footer.page__footer .oli-footer-band {
+  margin: 0 !important;
+  padding: 0 0 0.58rem !important;
+  color: rgba(244, 240, 232, 0.82);
+}
+
+#footer.page__footer .oli-footer-band__status {
+  max-width: 58rem;
+  margin: 0 !important;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+#footer.page__footer .page__footer-follow {
+  margin: 0 !important;
+  padding: 0.52rem 0 !important;
+  border-top: 1px solid rgba(244, 240, 232, 0.14);
+}
+
+#footer.page__footer .social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.34rem 0.9rem;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#footer.page__footer .social-icons li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#footer.page__footer .oli-footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.34rem 0.9rem;
+  margin: 0 !important;
+  padding: 0.52rem 0 !important;
+  border-top: 1px solid rgba(244, 240, 232, 0.14);
+  border-bottom: 1px solid rgba(244, 240, 232, 0.14);
+}
+
+#footer.page__footer .page__footer-copyright {
+  padding: 0.52rem 0 0 !important;
+  color: rgba(244, 240, 232, 0.68);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+#footer.page__footer .social-icons a,
+#footer.page__footer .oli-footer-legal a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  color: rgba(244, 240, 232, 0.84);
+  font-family: var(--oli-font-ui, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.075em;
+  line-height: 1.1;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#footer.page__footer .social-icons a:hover,
+#footer.page__footer .social-icons a:focus,
+#footer.page__footer .oli-footer-legal a:hover,
+#footer.page__footer .oli-footer-legal a:focus {
+  color: var(--oli-ivory);
+  text-decoration: none;
+}
+
+#footer.page__footer .social-icons i,
+#footer.page__footer .oli-footer-legal i {
+  width: 1.15em;
+  text-align: center;
+  transition: color 160ms ease;
+}
+
+#footer.page__footer .social-icons i {
+  color: rgba(33, 199, 232, 0.88);
+}
+
+#footer.page__footer .oli-footer-legal i {
+  color: var(--oli-gold);
+}
+
+#footer.page__footer .social-icons a:hover i,
+#footer.page__footer .social-icons a:focus i {
+  color: var(--oli-cyan);
+}
+
+#footer.page__footer .oli-footer-legal a:hover i,
+#footer.page__footer .oli-footer-legal a:focus i {
+  color: var(--oli-yellow);
+}
+
+#footer.page__footer .page__footer-copyright a {
+  color: rgba(244, 240, 232, 0.78);
+  text-decoration-color: rgba(200, 154, 59, 0.45);
+  text-underline-offset: 0.16em;
+}
+
+#footer.page__footer .page__footer-copyright a:hover,
+#footer.page__footer .page__footer-copyright a:focus {
+  color: var(--oli-ivory);
+  text-decoration-color: var(--oli-gold);
+}
+
+
+/* OLI issue opportunity status badges */
+.oli-issue-card__meta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 0 0.45rem;
+}
+
+.oli-issue-card__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.35rem;
+  padding: 0.14rem 0.52rem;
+  border: 1px solid rgba(7, 26, 61, 0.18);
+  border-radius: 999px;
+  background: rgba(7, 26, 61, 0.055);
+  color: var(--oli-primary);
+  font-family: var(--oli-font-ui, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.075em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.oli-issue-card__status--active {
+  border-color: rgba(33, 199, 232, 0.62);
+  background: rgba(33, 199, 232, 0.13);
+  box-shadow: none;
+}
+
+.oli-issue-card__status--decided {
+  border-color: rgba(200, 154, 59, 0.58);
+  background: rgba(200, 154, 59, 0.14);
+  box-shadow: none;
+}
+
+.oli-issue-card__status--potential {
+  border-color: rgba(110, 126, 47, 0.5);
+  background: rgba(110, 126, 47, 0.12);
+  box-shadow: none;
+}
+
+.oli-issue-card:hover .oli-issue-card__status,
+.oli-issue-card:focus .oli-issue-card__status,
+.oli-issue-card:focus-visible .oli-issue-card__status {
+  border-color: rgba(7, 26, 61, 0.36);
+}
+
+
+/* OLI heading permalink no-underline refinement */
+.page__content .header-link,
+.page__content .header-link:link,
+.page__content .header-link:visited,
+.page__content .header-link:hover,
+.page__content .header-link:focus,
+.page__content .header-link:focus-visible,
+.page__content .header-link:active,
+.page__content .header-link.is-copied {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+.page__content .header-link *,
+.page__content .header-link:hover *,
+.page__content .header-link:focus *,
+.page__content .header-link:active *,
+.page__content .header-link.is-copied * {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+.page__content .header-link:focus-visible {
+  outline: 2px solid rgba(200, 154, 59, 0.75);
+  outline-offset: 0.18em;
+  border-radius: 0.18em;
+}
+
+.page__content .header-link .oli-permalink-toast {
+  cursor: default;
+}
+
+
+/* OLI heading permalink toast mobile viewport guard */
+@media (max-width: 640px), (hover: none) and (pointer: coarse) {
+  .page__content .header-link {
+    position: relative;
+  }
+
+  .page__content .header-link .oli-permalink-toast {
+    left: auto !important;
+    right: 0 !important;
+    top: calc(100% + 0.35rem) !important;
+    transform: none !important;
+    max-width: min(14rem, calc(100vw - 2rem));
+    white-space: nowrap;
+    z-index: 20;
+  }
+
+  .page__content .header-link .oli-permalink-toast::before,
+  .page__content .header-link .oli-permalink-toast::after {
+    left: auto !important;
+    right: 0.65rem !important;
+  }
+}
+
+/* OLI masthead Themis logo */
+.greedy-nav .site-logo {
+  display: flex;
+  align-self: flex-end;
+  align-items: flex-end;
+  margin-inline-end: 0.65rem;
+}
+
+.greedy-nav .site-logo img {
+  display: block;
+  height: clamp(2.75rem, 4vw, 3.5rem);
+  width: auto;
+  max-height: none;
+}
+
+.greedy-nav .site-title {
+  align-self: flex-end;
+  line-height: 1.05;
+}
+
+@media (max-width: 600px) {
+  .greedy-nav .site-logo {
+    margin-inline-end: 0.5rem;
+  }
+
+  .greedy-nav .site-logo img {
+    height: 2.5rem;
+  }
+}
+
+/* OLI masthead Themis alignment override */
+:root {
+  --oli-masthead-height: 78px;
+  --oli-masthead-logo-top-gap: 6px;
+  --oli-masthead-logo-height: calc(var(--oli-masthead-height) - var(--oli-masthead-logo-top-gap));
+  --oli-masthead-title-y-nudge: 3px;
+}
+
+.masthead__inner-wrap {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.greedy-nav {
+  min-height: var(--oli-masthead-height);
+  align-items: stretch;
+}
+
+/* Site title row */
+.greedy-nav .site-title {
+  min-height: var(--oli-masthead-height);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  line-height: 1.05;
+  transform: translateY(var(--oli-masthead-title-y-nudge));
+}
+
+/* Minimal Mistakes may render the logo as img.site-logo or as .site-logo img. Handle both. */
+.greedy-nav img.site-logo,
+.greedy-nav .site-logo img {
+  height: var(--oli-masthead-logo-height);
+  width: auto;
+  max-height: none;
+  display: block;
+  object-fit: contain;
+}
+
+/* If the logo is inside the title link, bottom-align it within the masthead. */
+.greedy-nav .site-title img.site-logo {
+  align-self: flex-end;
+  margin-top: var(--oli-masthead-logo-top-gap);
+  margin-bottom: 0;
+}
+
+/* If the logo is a separate anchor before the title, bottom-align that anchor too. */
+.greedy-nav > .site-logo {
+  min-height: var(--oli-masthead-height);
+  display: inline-flex;
+  align-items: flex-end;
+  margin-inline-end: 0.7rem;
+  padding-top: var(--oli-masthead-logo-top-gap);
+  box-sizing: border-box;
+}
+
+/* Center masthead navigation links relative to the title text. */
+.greedy-nav .visible-links {
+  min-height: var(--oli-masthead-height);
+  display: flex;
+  align-items: center;
+  transform: translateY(var(--oli-masthead-title-y-nudge));
+}
+
+.greedy-nav .visible-links > li,
+.greedy-nav .visible-links a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.greedy-nav .greedy-nav__toggle {
+  align-self: center;
+  transform: translateY(var(--oli-masthead-title-y-nudge));
+}
+
+@media (max-width: 600px) {
+  :root {
+    --oli-masthead-height: 60px;
+    --oli-masthead-logo-top-gap: 5px;
+    --oli-masthead-title-y-nudge: 2px;
+  }
+
+  .greedy-nav .site-title {
+    gap: 0.5rem;
+  }
+
+  .greedy-nav > .site-logo {
+    margin-inline-end: 0.5rem;
+  }
+}
+/* End OLI masthead Themis alignment override */
+
+
+/* OLI footer shared link alignment */
+#footer.page__footer {
+  --oli-footer-link-column-gap: 1.25rem;
+  --oli-footer-link-row-gap: 0.45rem;
+  --oli-footer-link-icon-column: 1.25rem;
+  --oli-footer-link-label-gap: 0.42rem;
+}
+
+#footer.page__footer .social-icons,
+#footer.page__footer .oli-footer-legal {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: var(--oli-footer-link-column-gap);
+  row-gap: var(--oli-footer-link-row-gap);
+  align-items: center;
+  width: 100%;
+}
+
+#footer.page__footer .social-icons li {
+  display: block;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#footer.page__footer .social-icons li + li::before {
+  content: none;
+  padding: 0;
+}
+
+#footer.page__footer .social-icons > li > a,
+#footer.page__footer .oli-footer-legal > a {
+  display: grid;
+  grid-template-columns: var(--oli-footer-link-icon-column) minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--oli-footer-link-label-gap);
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+}
+
+#footer.page__footer .social-icons > li > a > i,
+#footer.page__footer .oli-footer-legal > a > i {
+  grid-column: 1;
+  justify-self: center;
+  width: var(--oli-footer-link-icon-column);
+  margin: 0;
+  text-align: center;
+}
+
+#footer.page__footer .social-icons > li > a > span,
+#footer.page__footer .oli-footer-legal > a > span {
+  grid-column: 2;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+@media (min-width: 22rem) {
+  #footer.page__footer .social-icons,
+  #footer.page__footer .oli-footer-legal {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 54em) {
+  #footer.page__footer .social-icons,
+  #footer.page__footer .oli-footer-legal {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }

@@ -1,7 +1,7 @@
 ---
 title: "First Choice Women's Resource Centers, Inc. v. Davenport"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 20
 status: decided
 featured_home: false
@@ -53,4 +53,4 @@ A timely OLI brief could help courts see why standing, reviewability, and associ
 
 ## Clarification
 
-This page is not an endorsement of the organization's religious or abortion-related views. It treats the case as an example of the need for objective limits on state investigatory power.
+OLI's concern is not endorsement of the organization's religious or abortion-related views. The principle is that state investigatory power must be constrained by objective limits, especially when it burdens private association, donor privacy, or controversial advocacy.

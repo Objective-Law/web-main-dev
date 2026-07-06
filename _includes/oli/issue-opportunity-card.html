@@ -5,14 +5,23 @@
   {%- assign show_tags = false -%}
 {%- endif -%}
 {%- assign card_eyebrow = include.eyebrow | default: "" | strip -%}
+{%- assign issue_status_key = item.status | default: "" | strip -%}
+{%- assign issue_status = site.data.issue_statuses[issue_status_key] -%}
+{%- assign issue_status_label = issue_status.label | default: issue_status_key | replace: "-", " " -%}
 {%- assign item_description = item.excerpt | default: item.description | default: item.content | strip_html | truncatewords: 32 -%}
 
 <a class="oli-issue-card"
    href="{{ item.url | relative_url }}"
    data-oli-issue-opportunity-card
    data-issue-title="{{ item.title | escape }}"
-   data-issue-tags="{{ item.tags | join: '|' | escape }}">
+   data-issue-tags="{{ item.tags | join: '|' | escape }}"
+   data-issue-status="{{ issue_status_key | escape }}">
   <div class="oli-issue-card__body">
+    {% if issue_status_key != "" %}
+      <div class="oli-issue-card__meta">
+        <span class="oli-issue-card__status oli-issue-card__status--{{ issue_status_key | slugify }}">{{ issue_status_label }}</span>
+      </div>
+    {% endif %}
     {% if card_eyebrow != "" %}
       <p class="oli-issue-card__eyebrow">{{ card_eyebrow }}</p>
     {% endif %}

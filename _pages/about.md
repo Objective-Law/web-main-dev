@@ -1,14 +1,18 @@
 ---
-title: "About the Objective Law Initiative"
+title: "About The Objective Law Initiative"
 date: "2026-06-10"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 excerpt: "About OLI's mission, first principles, method, philosophical orientation, activities, team, and contribution posture."
 tagline: "Fighting to secure individual rights against arbitrary government power through a constitutional framework grounded in rational principles of rights and limited government."
 classes: wide
 toc: false
 header:
-  kicker: "About OLI"
-  overlay_title: "About the Objective Law Initiative"
+  # kicker: "About OLI"
+  overlay_title: "About OLI"
+  overlay_images:
+    - image: /assets/images/overlay/about.webp
+      focal_point: "66% 33%"
+      anchor_point: "66% 33%"
 ---
 
 <section class="oli-section" markdown="1">
@@ -27,6 +31,30 @@ That understanding has weakened over time. The Founders established a constituti
 The result is that rights are too often treated as political interests to be balanced away, government power as an instrument for achieving preferred social outcomes, and constitutional limits as flexible obstacles to be adapted to pragmatic demands. This is not a problem of one administration, party, ideology, or political cycle. Nor is it merely a problem of bad policy or isolated abuses of power. It is the erosion of the rational principles that make constitutional government possible.
 
 OLI exists to help restore clarity to those principles and to defend a constitutional order in which government is limited by objective law and individual rights are treated as real constraints on political power.
+</section>
+
+<section class="oli-section" markdown="1">
+## Why focus on law when the deeper issue is cultural?
+
+Law is not the whole effort for liberty. It is one part of a wider philosophical endeavor—expressed across cultural, moral, educational, artistic, scientific, economic, technological, and civic domains—focused on the kind of society suitable for human prosperity.
+
+OLI does not regard legal activism as a substitute for education, public persuasion, political commentary, institution-building, or the creation of life-affirming art. Those efforts are complementary. A free society depends on a culture that understands and values reason, individual rights, productive achievement, independence, and human flourishing.
+
+Law does not stand apart from culture. It reflects the dominant ideas, values, and moral assumptions of a society. In that sense, the political and legal order is downstream from the broader culture.
+
+But it does not follow that working at the legal level is backward or secondary. In a living culture, different domains—philosophy, education, art, science, public discourse, and law—mutually influence and reinforce one another. Changes in law can shape expectations, incentives, and habits of thought, just as changes in culture can reshape the law.
+
+Law, therefore, has a distinctive role: It is where political ideas take the form of coercive rules governing people's lives. Consider freedom of speech. It is a precondition for the spread of life- and liberty-affirming ideas across every level of culture. Yet today, courts are deciding cases that will determine how far that freedom is protected in practice. If legal standards governing speech become vague, discretionary, or detached from individual rights, then even the best ideas may find no voice for expression. The same principle applies across many areas of life and liberty: When bad ideas are embedded in law, they are not only expressed—they are institutionalized and enforced.
+
+Work at the legal level can have durable impact, not in isolation, but as part of a reinforcing cycle between law and the broader culture. Legal arguments, judicial opinions, and scholarly frameworks accumulate over time, shaping how lawyers, judges, and institutions think and act. Those institutions, in turn, influence education, professional training, and the intellectual environment encountered by younger generations. In this way, even work focused on law alone can have downstream effects on how rising generations understand rights, government, and the role of reason in public life.
+
+This durability depends on the fact that legal change is intertwined with concurrent efforts across many dimensions of culture. Education, media, art, science, business, technology, and public discourse all contribute to the ideas and values that make principled legal frameworks possible and sustainable. OLI's work participates in this broader flywheel: It aims to affect immediate legal debates, while also contributing to the longer-term trajectory of legal thought and institutional practice.
+
+That point matters especially for younger generations and for the broader public. Anti-liberty ideas do not spread by technical argument alone. They often succeed by attaching political conclusions to moral emotions: compassion, guilt, fear, resentment, belonging, alienation, indignation, or the desire to live for something important. Too often, the answer from defenders of liberty has been narrower than the challenge: better economics, sharper legal technicalities, or abstract appeals to "logic" stripped of moral urgency.
+
+That is not enough. The answer to emotional manipulation is not emotionalism, and it is not colder argument—it is integration. A proper defense of liberty must join facts and values, logic and emotion, principle and purpose. It must show not only that individual rights are legally and philosophically correct, but why they matter to a human life: to the student choosing what to believe, the entrepreneur building something new, the professional acting on independent judgment, the artist creating from personal vision, the parent raising a family, and the citizen who wants to live without asking permission.
+
+OLI focuses on law because that is where we believe we can add distinctive value. Our aim is not to offer dry legal technicalities for specialists alone, but to revive the best of the American legal tradition: limited government, individual rights, objective standards, and law constrained by reason rather than arbitrary power. By addressing both the courts and the general public in this way, we seek to make the legal defense of liberty morally vivid, publicly intelligible, and personally meaningful—not by substituting emotion for reason, but by showing how reason, rights, and freedom are indispensable to human flourishing.
 </section>
 
 <section class="oli-section" markdown="1">

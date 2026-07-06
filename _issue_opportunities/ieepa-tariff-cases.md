@@ -1,7 +1,7 @@
 ---
 title: "Learning Resources, Inc. v. Trump / Trump v. V.O.S. Selections, Inc."
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 30
 status: decided
 featured_home: true
@@ -53,4 +53,4 @@ With sufficient support, OLI could monitor cases like these earlier, develop a s
 
 ## Clarification
 
-This page is not a position on ordinary tariff policy, trade policy, or foreign affairs strategy. It identifies the cases as examples of the need for objective statutory limits on executive power.
+OLI's concern is not ordinary tariff policy, trade policy, or foreign-affairs strategy. The principle is that executive power must remain bound by objective statutory limits, especially when economic coercion is imposed by unilateral emergency authority.

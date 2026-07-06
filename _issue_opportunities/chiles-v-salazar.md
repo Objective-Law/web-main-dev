@@ -1,7 +1,7 @@
 ---
 title: "Chiles v. Salazar"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 10
 status: decided
 featured_home: true
@@ -53,4 +53,4 @@ With earlier capacity, OLI could have considered a brief explaining why viewpoin
 
 ## Clarification
 
-This page is not an endorsement of any particular therapeutic method, religious doctrine, or view about sexuality or gender. It identifies the case as an example of the need for objective limits on government power over speech.
+OLI's concern is not endorsement of any therapeutic method, religious doctrine, or view about sexuality or gender. The principle is that government may not use licensing power to impose official orthodoxy on protected speech.

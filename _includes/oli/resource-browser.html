@@ -1,17 +1,87 @@
 {% assign resources = site.resources | sort: "title" %}
+{% assign show_placeholders = false %}
+{% if include.show_placeholders == true or include.show_placeholders == "true" %}
+  {% assign show_placeholders = true %}
+{% endif %}
+
+{% assign min_items_for_filters = include.min_items_for_filters %}
+{% if min_items_for_filters == nil or min_items_for_filters == "" %}
+  {% assign min_items_for_filters = 6 %}
+{% endif %}
+{% assign min_items_for_filters = min_items_for_filters | plus: 0 %}
+
+{% assign min_types_for_filters = include.min_types_for_filters %}
+{% if min_types_for_filters == nil or min_types_for_filters == "" %}
+  {% assign min_types_for_filters = 2 %}
+{% endif %}
+{% assign min_types_for_filters = min_types_for_filters | plus: 0 %}
+
+{% assign visible_count = 0 %}
+{% capture visible_type_values %}
+  {%- for item in resources -%}
+    {%- assign hide_item = false -%}
+    {%- if show_placeholders == false and item.placeholder == true -%}
+      {%- assign hide_item = true -%}
+    {%- elsif show_placeholders == false and item.placeholder == "true" -%}
+      {%- assign hide_item = true -%}
+    {%- endif -%}
+    {%- unless hide_item -%}
+      {%- assign visible_count = visible_count | plus: 1 -%}
+      {%- assign item_type = item.type | default: item.resource_type | default: "article" -%}
+      {{- item_type -}}|
+    {%- endunless -%}
+  {%- endfor -%}
+{% endcapture %}
+{% assign visible_types = visible_type_values | split: "|" | uniq | sort %}
+{% assign show_filters = false %}
+{% if visible_count >= min_items_for_filters and visible_types.size >= min_types_for_filters %}
+  {% assign show_filters = true %}
+{% endif %}
+
 <div class="oli-resource-browser" data-oli-resource-browser>
-  <div class="oli-resource-filters" aria-label="Filter resources">
-    <button class="oli-resource-filter is-active" type="button" data-oli-resource-filter="all">All</button>
-    <button class="oli-resource-filter" type="button" data-oli-resource-filter="article">Articles</button>
-    <button class="oli-resource-filter" type="button" data-oli-resource-filter="video">Videos</button>
-    <button class="oli-resource-filter" type="button" data-oli-resource-filter="brief">Briefs</button>
-    <button class="oli-resource-filter" type="button" data-oli-resource-filter="image">Images</button>
-  </div>
-  <p class="oli-section__lead" data-oli-resource-count></p>
-  <div class="oli-resource-grid" data-oli-resource-list>
-    {% for item in resources %}
-      {% include oli/resource-card.html item=item %}
-    {% endfor %}
-  </div>
-  <p class="notice--info" data-oli-resource-empty hidden>No resources match this filter yet.</p>
+  {% if visible_count > 0 %}
+    <div class="oli-resource-introduction">
+      <p class="oli-section__lead">OLI's resource library collects articles, case notes, briefs, videos, and visual explainers that translate constitutional principles into usable legal arguments.</p>
+      <p>These materials are intended for lawyers, scholars, judges, students, journalists, and citizens who want a principled framework for objective law, individual rights, and limited government.</p>
+    </div>
+
+    {% if show_filters %}
+      <div class="oli-resource-filters" aria-label="Filter resources">
+        <button class="oli-resource-filter is-active" type="button" data-oli-resource-filter="all">All</button>
+        {% for resource_type in visible_types %}
+          {% capture filter_label %}
+            {%- case resource_type -%}
+              {%- when "article" -%}Articles
+              {%- when "video" -%}Videos
+              {%- when "brief" -%}Briefs
+              {%- when "image" -%}Images
+              {%- else -%}{{ resource_type | replace: "-", " " | capitalize }}
+            {%- endcase -%}
+          {% endcapture %}
+          <button class="oli-resource-filter" type="button" data-oli-resource-filter="{{ resource_type }}">{{ filter_label | strip }}</button>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if show_filters %}<p class="oli-section__lead" data-oli-resource-count>{{ visible_count }} {% if visible_count == 1 %}resource{% else %}resources{% endif %}</p>{% endif %}
+    <div class="oli-resource-grid" data-oli-resource-list>
+      {% for item in resources %}
+        {% assign hide_item = false %}
+        {% if show_placeholders == false and item.placeholder == true %}
+          {% assign hide_item = true %}
+        {% elsif show_placeholders == false and item.placeholder == "true" %}
+          {% assign hide_item = true %}
+        {% endif %}
+        {% unless hide_item %}
+          {% include oli/resource-card.html item=item %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+    <p class="notice--info" data-oli-resource-empty hidden>No resources match this filter yet.</p>
+  {% else %}
+    <div class="oli-resource-empty">
+      <p class="oli-section__lead">OLI's resource library is still being built. As articles, briefs, videos, and educational materials become available, they will appear here.</p>
+      <p>In the meantime, feel free to review <a href="/contribute/#cases-do-not-wait-for-infrastructure">the kinds of cases and controversies OLI is preparing to address</a>.</p>
+    </div>
+  {% endif %}
 </div>

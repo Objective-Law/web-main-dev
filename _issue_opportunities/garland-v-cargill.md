@@ -1,7 +1,7 @@
 ---
 title: "Garland v. Cargill"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 100
 status: decided
 featured_home: false
@@ -55,4 +55,4 @@ Cases like Cargill often attract issue-specific advocacy. OLI can add a more gen
 
 ## Clarification
 
-This page is not a position on firearms policy. It treats the case as an example of fair notice, statutory meaning, and limits on agency-created liability.
+OLI's concern is not a general position on firearms policy. The principle is that criminal liability must rest on objective statutory meaning, fair notice, and law enacted by Congress rather than agency revision after the fact.

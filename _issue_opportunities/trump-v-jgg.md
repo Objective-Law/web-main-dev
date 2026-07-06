@@ -1,17 +1,17 @@
 ---
-title: "Trump v. J.G.G."
+title: "Trump v. J.G.G. / J.G.G. v. Trump"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 140
-status: decided
+status: active
 featured_home: false
 featured_contribute: false
-excerpt: "An emergency immigration case involving the Alien Enemies Act, habeas review, and the limits of executive removal power."
+excerpt: "An active Alien Enemies Act controversy over emergency removal power, habeas access, venue, and judicial review."
 tags:
-  - Alien Enemies Act
+  - emergency power
   - habeas corpus
   - due process
-  - emergency power
+  - separation of powers
 header:
   kicker: "Issue Opportunity"
   overlay_title: "Trump v. J.G.G."
@@ -19,36 +19,36 @@ header:
 
 ## Why This Case Matters
 
-Trump v. J.G.G. concerned the executive branch's invocation of the Alien Enemies Act to remove Venezuelan nationals alleged to be associated with Tren de Aragua.
+Trump v. J.G.G. arose from litigation over the President's invocation of the Alien Enemies Act and the removal of Venezuelan detainees alleged by the government to fall within the proclamation.
 
-The case arose in an emergency posture. The immediate procedural questions included where detainees must file habeas petitions and what process must be provided before removal.
+The Supreme Court acted on emergency relief in 2025, including venue and procedural questions surrounding the district court's temporary restraining orders. But the broader Alien Enemies Act controversy remains live in related proceedings and continues to raise fundamental questions about emergency power, habeas access, and judicial review.
 
-For OLI, the deeper issue is whether emergency and national-security language may convert bounded legal authority into discretionary executive power over persons.
+For OLI, the case matters because emergency authority is one of the places where objective law is most vulnerable to collapse into executive discretion.
 
 ## The Legal Question
 
-The case raised questions about the scope of the Alien Enemies Act, the availability of habeas review, notice before removal, and the judiciary's role when the executive invokes extraordinary removal authority.
+The legal questions include whether the Alien Enemies Act authorizes the challenged removals, what forum and procedure are available for detainees to contest removal, and how courts should evaluate executive assertions of emergency authority.
 
-Even where immigration law grants the political branches substantial power, that power must still be exercised under law. The government must identify who is subject to a legal rule, why the rule applies, and what process exists to contest an erroneous classification.
+The deeper issue is whether coercive power can be exercised against individuals under broad categorical claims without meaningful judicial review before the injury becomes irreversible.
 
 ## The OLI Angle
 
-An OLI analysis would focus on objective classification and meaningful review.
+An OLI analysis would emphasize that emergency power must still be law-governed power.
 
-If the executive may label a class of persons as removable under a wartime statute without adequate notice, proof, or opportunity for judicial review, legal status becomes hostage to executive assertion.
-
-Emergency powers must be tied to objective triggering conditions. Labels such as invasion, war, enemy, gang member, or national-security threat cannot substitute for legal standards and evidence.
+The rule of law does not require courts to ignore genuine emergencies. But it does require objective standards: defined statutory authority, identifiable facts, meaningful process, and judicial review capable of constraining arbitrary action.
 
 ## What OLI Could Have Contributed
 
-OLI could have helped courts articulate a principle that applies across administrations: extraordinary executive power requires especially clear legal limits.
+OLI could help distinguish legitimate national-security authority from open-ended discretion.
 
-The question is not whether noncitizens may ever be removed. The question is whether removal under extraordinary authority may occur without objective procedures to determine who falls within the law.
+The legal question is not whether the political branches have any power over foreign affairs or immigration. They do. The question is whether that power can be exercised through vague classifications, rushed procedures, and limited review in a way that deprives individuals of any realistic chance to contest the government's claim.
 
 ## Why Timely Support Matters
 
-Emergency-docket litigation moves too quickly for organizations without standing capacity. OLI needs research and writing infrastructure before such cases arise, not after briefing deadlines pass.
+Emergency litigation moves quickly. By the time a case reaches the Supreme Court on an emergency application, the window for developing a principled legal framework may be narrow.
+
+OLI could add value by preparing standing analysis on emergency power, habeas access, due process, and the objective limits of executive classification.
 
 ## Clarification
 
-This page is not a general immigration-policy statement. It treats the case as an example of emergency power, objective classification, and judicial review.
+OLI's concern is not any individual's immigration status. The principle is that emergency power must remain law-governed power, with objective legal authority, meaningful process, and judicial review capable of constraining arbitrary action.

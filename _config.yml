@@ -1,7 +1,7 @@
 # Objective Law Initiative
 # Local Minimal Mistakes build for native GitHub Pages/Jekyll.
 
-title: "Objective Law Initiative"
+title: "The Objective Law Initiative"
 title_separator: "|"
 description: "The Objective Law Initiative fights to secure individual rights against arbitrary power by developing and applying a constitutional framework grounded in rational principles of rights and limited government."
 url: "https://objectivelaw.org"
@@ -12,10 +12,14 @@ locale: "en-US"
 date_format: "%Y-%m-%d"
 permalink: /:categories/:title/
 
-logo: "/assets/images/oli/oli-logo-placeholder.svg"
-masthead_title: "Objective Law Initiative"
+logo: "/assets/images/oli/oli-logo-themis-only-transparent.webp"
+og_image: "/assets/images/oli/oli-logo-themis-only-transparent.webp"
+og_image_alt: "Themis holding scales, the Objective Law Initiative logo"
+masthead_title: "The Objective Law Initiative"
 minimal_mistakes_skin: "contrast"
 search: false
+after_footer_scripts:
+  - /assets/js/oli/heading-permalinks.js
 
 plugins:
   - jekyll-include-cache
@@ -59,8 +63,8 @@ defaults:
       read_time: false
       share: false
       header:
-        overlay_color: "#111111"
-        overlay_filter: "linear-gradient(135deg, rgba(17, 17, 17, 0.88), rgba(90, 22, 38, 0.68))"
+        overlay_color: "#071A3D"
+        # overlay_filter: "linear-gradient(110deg, rgba(7, 26, 61, 0.92), rgba(17, 19, 24, 0.58))"
         overlay_image_focal_point: "50% 50%"
         overlay_image_anchor_point: "50% 50%"
   - scope:
@@ -137,10 +141,10 @@ defaults:
       show_resource_meta: false
       show_status_badge: false
       header:
-        overlay_color: "#111111"
-        overlay_filter: "linear-gradient(135deg, rgba(17, 17, 17, 0.88), rgba(90, 22, 38, 0.68))"
-        overlay_image_focal_point: "50% 50%"
-        overlay_image_anchor_point: "50% 50%"
+        overlay_images:
+        - image: /assets/images/overlay/issue_opportunities.webp
+          focal_point: "75% 66%"
+          anchor_point: "75% 66%"
   - scope:
       path: ""
       type: faqs
@@ -149,7 +153,7 @@ defaults:
       share: false
 
 author:
-  name: "Objective Law Initiative"
+  name: "The Objective Law Initiative"
   bio: "Public-interest legal advocacy for objective law, individual rights, and limited government."
   links:
     - label: "Contact"
@@ -161,6 +165,19 @@ twitter:
 
 facebook:
   publisher: "https://www.facebook.com/ObjectiveLaw/"
+  app_id: "999956546408596"
+
+google_analytics: "G-2M84D271HX"
+
+social:
+  name: "The Objective Law Initiative"
+  type: "Organization"
+  links:
+    - "https://www.facebook.com/ObjectiveLaw/"
+    - "https://x.com/ObjectiveLawOLI"
+    - "https://www.linkedin.com/company/objective-law/"
+    - "https://www.instagram.com/objectivelawinitiative"
+    - "https://www.youtube.com/@ObjectiveLawInitiative"
 
 footer:
   since: 2025

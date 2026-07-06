@@ -1,7 +1,7 @@
 ---
 title: "National Rifle Association of America v. Vullo"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 110
 status: decided
 featured_home: true
@@ -51,4 +51,4 @@ Modern censorship often operates through indirect pressure on intermediaries. OL
 
 ## Clarification
 
-This page is not an endorsement of the NRA or any gun-policy position. It treats the case as an example of government coercion against disfavored advocacy.
+OLI's concern is not endorsement of the NRA or any gun-policy position. The principle is that government may not use regulatory pressure to punish, suppress, or financially isolate disfavored advocacy.

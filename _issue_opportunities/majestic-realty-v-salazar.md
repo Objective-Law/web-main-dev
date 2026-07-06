@@ -1,7 +1,7 @@
 ---
 title: "Majestic Realty Co. v. Salazar"
 date: "2026-06-09"
-last_modified_at: "2026-06-10"
+last_modified_at: "2026-07-05"
 order: 160
 status: potential
 featured_home: false
@@ -51,4 +51,4 @@ Property-and-speech cases often attract separate doctrinal arguments. OLI can in
 
 ## Clarification
 
-This page relies on the case name and issue description supplied for site-planning purposes. Before publication, verify the caption, procedural posture, docket, and current status if this page is to include specific litigation details beyond the principle stated here.
+OLI's concern is not endorsement of every action taken by a property owner or business. The principle is that private property should not be converted into a platform for others' purposes by state command without objective constitutional limits.
