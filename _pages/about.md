@@ -5,7 +5,10 @@ last_modified_at: "2026-07-05"
 excerpt: "About OLI's mission, first principles, method, philosophical orientation, activities, team, and contribution posture."
 tagline: "Fighting to secure individual rights against arbitrary government power through a constitutional framework grounded in rational principles of rights and limited government."
 classes: wide
-toc: false
+toc_widget:
+  enabled: true
+  min_level: 2
+  max_level: 4
 header:
   # kicker: "About OLI"
   overlay_title: "About OLI"
