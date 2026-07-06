@@ -163,6 +163,51 @@
     copyPermalink(link);
   }
 
+  function clusterTrailingHeadingToken(link) {
+    if (link.closest(".oli-heading-anchor-cluster")) {
+      return;
+    }
+
+    const heading = link.parentElement;
+
+    if (!heading || !heading.matches("h1, h2, h3, h4, h5, h6")) {
+      return;
+    }
+
+    let trailingNode = link.previousSibling;
+
+    while (trailingNode && trailingNode.nodeType === Node.TEXT_NODE && trailingNode.textContent.trim() === "") {
+      trailingNode = trailingNode.previousSibling;
+    }
+
+    if (!trailingNode || trailingNode.nodeType !== Node.TEXT_NODE) {
+      return;
+    }
+
+    const trailingText = trailingNode.textContent;
+    const match = trailingText.match(/^([\s\S]*?)(\s+)(\S+)\s*$/) ||
+      trailingText.match(/^(\s*)(\S+)\s*$/);
+
+    if (!match) {
+      return;
+    }
+
+    const hasPrecedingText = match.length === 4;
+    const prefix = hasPrecedingText ? match[1] + match[2] : match[1];
+    const finalToken = hasPrecedingText ? match[3] : match[2];
+
+    if (!finalToken) {
+      return;
+    }
+
+    const cluster = document.createElement("span");
+    cluster.className = "oli-heading-anchor-cluster";
+    trailingNode.textContent = prefix;
+    cluster.appendChild(document.createTextNode(finalToken));
+    heading.insertBefore(cluster, link);
+    cluster.appendChild(link);
+  }
+
   function syncHeaderLinks() {
     getHeaderLinks().forEach(function (link) {
       Array.from(link.childNodes).forEach(function (node) {
@@ -180,6 +225,8 @@
       if (!link.title || link.title === "Permalink") {
         link.title = "Copy permalink";
       }
+
+      clusterTrailingHeadingToken(link);
 
       if (link.dataset.oliPermalinkBound === "true") {
         return;

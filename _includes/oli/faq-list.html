@@ -1,8 +1,9 @@
 {%- assign faqs = site.faqs | sort: "order" -%}
 <div class="oli-faq-list">
   {%- for faq in faqs -%}
-    <section class="oli-faq-item" id="{{ faq.slug | default: faq.title | slugify }}">
-      <h3>{{ faq.title }}</h3>
+    {%- assign faq_id = faq.slug | default: faq.title | slugify -%}
+    <section class="oli-faq-item" id="faq-item-{{ faq_id }}">
+      <h3 id="{{ faq_id }}">{{ faq.title }}</h3>
       {{ faq.content | markdownify }}
     </section>
   {%- endfor -%}

@@ -1,14 +1,14 @@
 ---
 title: "About"
 date: "2026-06-10"
-last_modified_at: "2026-07-05"
+last_modified_at: "2026-07-06"
 excerpt: "About OLI's mission, first principles, method, philosophical orientation, activities, team, and contribution posture."
 tagline: "Fighting to secure individual rights against arbitrary government power through a constitutional framework grounded in rational principles of rights and limited government."
 classes: wide
 toc_widget:
   enabled: true
   min_level: 2
-  max_level: 2
+  max_level: 3
 header:
   # kicker: "About OLI"
   overlay_title: "About OLI"
@@ -125,21 +125,21 @@ OLI also collaborates with scholars, attorneys, law students, educational instit
 </section>
 
 <section class="oli-section">
-  <h2>Our Team</h2>
+  <h2 id="our-team">Our Team</h2>
 
   <div class="oli-team-list">
     <section class="oli-team-member">
-      <h3>Nicholas Provenzo</h3>
+      <h3 id="nicholas-provenzo">Nicholas Provenzo</h3>
       <p><strong>CEO, President, & Legal Director</strong></p>
       <p>An attorney, writer, and longtime Objectivist, Nicholas brings decades of legal advocacy experience and philosophical insight to the initiative. A former FedSoc chapter leader and legal fellow, he is responsible for the legal vision, authorship of briefs, coalition strategy, and public positioning of OLI's mission. He previously served in senior roles at a national right-to-work legal foundation and has published in legal and philosophical outlets.</p>
     </section>
     <section class="oli-team-member">
-      <h3>Arthur Zey</h3>
+      <h3 id="arthur-zey">Arthur Zey</h3>
       <p><strong>COO, Secretary, Treasurer, & Chair of the Board</strong></p>
       <p>Arthur brings a unique blend of legal, operational, and philosophical experience to the team. He holds a JD from UCLA School of Law, is admitted to the California Bar, and is a graduate of the Objectivist Academic Center. He previously founded and led a 501(c)(3) Objectivist student organization and has worked extensively in executive roles at technology companies, ranging from startups to multinational corporations, including Twitter, Autodesk, Amazon, and Ookla. Primarily a product manager, his work has involved coordinating engineering, design, marketing, legal, business strategy, and leadership teams, conducting user research, refining product strategy, and managing QA and testing pipelines. At the Ayn Rand Institute, he helped design and implement tools to streamline the management of OCON, ARI's summer conference, giving him direct experience with the operational demands of Objectivist intellectual events.</p>
     </section>
     <section class="oli-team-member">
-      <h3>Eric Daniels</h3>
+      <h3 id="eric-daniels">Eric Daniels</h3>
       <p><strong>Board Member</strong></p>
       <p>Dr Eric Daniels is an educator and scholar specializing in American history, the history of capitalism, American legal history, the history of American thought, and educational theory and pedagogy. He is Assistant Director of the Snow Institute for the Study of Capitalism at Clemson University. He holds a BA in History and Rhetoric from Drake University and an MA and PhD in American History from the University of Wisconsin-Madison. He has taught at the Program on Values and Ethics in the Marketplace at Duke University and at the Fund for American Studies Institute on Business and Government Affairs at Georgetown University. He also holds an International Diploma in Adolescent Education from the Association Montessori Internationale, and taught and served as Head of School at LePort Montessori in Southern California. His publications and research address the history of individualism in American thought, monopolies and antitrust, American political history, and the intellectual foundations of capitalism and liberty.</p>
     </section>
@@ -165,7 +165,7 @@ Current priority areas include:
 </section>
 
 <section class="oli-section">
-  <h2>FAQs</h2>
+  <h2 id="faqs">FAQs</h2>
 
   {% include oli/faq-list.html %}
 </section>
