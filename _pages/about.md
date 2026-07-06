@@ -2,6 +2,7 @@
 title: "About"
 date: "2026-06-10"
 last_modified_at: "2026-07-06"
+last<i>modified</i>at: "2026-07-06"
 excerpt: "About OLI's mission, first principles, method, philosophical orientation, activities, team, and contribution posture."
 tagline: "Fighting to secure individual rights against arbitrary government power through a constitutional framework grounded in rational principles of rights and limited government."
 classes: wide
@@ -135,7 +136,7 @@ OLI also collaborates with scholars, attorneys, law students, educational instit
       <p>Nicholas holds a JD from the University of Baltimore School of Law, an LLM in Law and Economics from Antonin Scalia Law School at George Mason University, and an undergraduate individualized study degree from George Mason University focused on the theory and practice of capitalism. He is licensed to practice law in Virginia and Washington, DC, and is admitted before several federal courts, including the Supreme Court of the United States, the US Court of Appeals for the Fourth Circuit, and the US Court of Federal Claims.</p>
       <p>His legal work has included vaccine-injury claims, federal litigation, nonprofit counsel, access-to-records matters, and advocacy on behalf of individuals seeking accountability from public institutions. He has advised nonprofit organizations on incorporation, bylaws, tax-exempt status, governance, risk mitigation, youth-protection policies, and volunteer indemnification.</p>
       <p>Before his legal practice, Nicholas founded and led a nonprofit public-policy organization dedicated to defending free enterprise and individual rights. His advocacy addressed antitrust law, tax reform, property rights, environmental policy, genetic research, and immigration. He provided written testimony to the US Senate Committee on the Judiciary and submitted arguments in connection with the Microsoft antitrust case that were included among the Department of Justice's "Major Comments".</p>
-      <p>Nicholas's writing and commentary have appeared in or been featured by outlets including _USA Today_, _The Washington Post_, _The Washington Times_, _The Atlanta Journal-Constitution_, NPR's _All Things Considered_, _CNN News_, and _Politically Incorrect with Bill Maher_. He has also organized and participated in legal and policy programming, mentored students and emerging advocates, and helped build coalitions around ideas central to liberty and the rule of law.</p>
+      <p>Nicholas's writing and commentary have appeared in or been featured by outlets including <i>USA Today</i>, <i>The Washington Post</i>, <i>The Washington Times</i>, <i>The Atlanta Journal-Constitution</i>, NPR's <i>All Things Considered</i>, <i>CNN News</i>, and <i>Politically Incorrect with Bill Maher</i>. He has also organized and participated in legal and policy programming, mentored students and emerging advocates, and helped build coalitions around ideas central to liberty and the rule of law.</p>
       <p>A Marine Corps veteran, Nicholas served as a corporal and participated in Operation Sharp Edge in Monrovia, Liberia, as well as operations in the eastern Mediterranean in support of Operations Desert Shield and Provide Comfort. He currently serves on the Board of Directors of Outdoor Service Guides and volunteers in support of inclusive traditional scouting.</p>
       <p>At the Objective Law Initiative, Nicholas serves as a director, lead attorney, and strategic architect. His work reflects the conviction that law is not merely a technical profession, but a moral enterprise: the means by which individual rights are defined, protected, and made real in human life.</p>
     </section>
@@ -166,7 +167,7 @@ Current priority areas include:
 - legal research and brief development
 - writing, editing, design, and educational content support
 
-{% include double_icon_button.html href="/contribute/" label="Read more" alignment="center" container_alignment="right" %}
+{% include double<i>icon</i>button.html href="/contribute/" label="Read more" alignment="center" container_alignment="right" %}
 
 </section>
 
