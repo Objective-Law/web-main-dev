@@ -159,6 +159,9 @@ Current priority areas include:
 - media content, marketing, and public relations
 - legal research and brief development
 - writing, editing, design, and educational content support
+
+{% include double_icon_button.html href="/contribute/" label="Read more" alignment="center" container_alignment="right" %}
+
 </section>
 
 <section class="oli-section">
