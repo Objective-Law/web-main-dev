@@ -8,7 +8,7 @@ classes: wide
 toc_widget:
   enabled: true
   min_level: 2
-  max_level: 4
+  max_level: 2
 header:
   # kicker: "About OLI"
   overlay_title: "About OLI"
