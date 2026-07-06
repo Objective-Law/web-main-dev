@@ -1,5 +1,5 @@
 ---
-title: "About The Objective Law Initiative"
+title: "About"
 date: "2026-06-10"
 last_modified_at: "2026-07-05"
 excerpt: "About OLI's mission, first principles, method, philosophical orientation, activities, team, and contribution posture."
