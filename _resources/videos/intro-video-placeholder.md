@@ -1,9 +1,10 @@
 ---
 title: "Introductory Video Placeholder"
 date: 2026-06-09
-last_modified_at: "2026-06-09"
+last_modified_at: "2026-07-07"
 description: "A sample video resource entry reserved for OLI's future introductory video."
 placeholder: true
+published: false
 tags:
   - video
   - introduction

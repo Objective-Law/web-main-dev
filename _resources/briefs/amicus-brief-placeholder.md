@@ -1,9 +1,10 @@
 ---
 title: "Amicus Brief Placeholder"
 date: 2026-06-09
-last_modified_at: "2026-06-09"
+last_modified_at: "2026-07-07"
 description: "A sample brief resource entry reserved for future OLI amicus work."
 placeholder: true
+published: false
 tags:
   - amicus
   - constitutional-law

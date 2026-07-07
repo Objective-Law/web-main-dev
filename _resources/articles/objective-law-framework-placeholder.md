@@ -1,10 +1,11 @@
 ---
 title: "Objective Law Framework Placeholder"
 date: 2026-06-09
-last_modified_at: 2026-06-09
+last_modified_at: "2026-07-07"
 author: "Objective Law Initiative"
 description: "A sample article proving article resource pages, share controls, print controls, glossary popovers, and citation popovers."
 placeholder: true
+published: false
 header:
   kicker: "Framework sample"
 tags:

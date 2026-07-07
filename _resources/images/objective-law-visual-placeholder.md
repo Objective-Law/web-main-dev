@@ -1,9 +1,10 @@
 ---
 title: "Objective Law Visual Media Placeholder"
 date: 2026-06-09
-last_modified_at: "2026-06-09"
+last_modified_at: "2026-07-07"
 description: "A sample visual-media resource proving tabbed local media and platform fallback mechanics."
 placeholder: true
+published: false
 tags:
   - visual-media
   - placeholder
