@@ -1,7 +1,7 @@
 ---
 title: "About"
 date: "2026-06-10"
-last_modified_at: "2026-07-07"
+last_modified_at: "2026-07-08"
 excerpt: "Fighting to secure individual rights against arbitrary government power through a constitutional framework grounded in rational principles of rights and limited government."
 classes: wide
 toc_widget:
@@ -140,7 +140,7 @@ OLI also collaborates with scholars, attorneys, law students, educational instit
     </section>
     <section class="oli-team-member">
       <h3 id="arthur-zey">Arthur Zey</h3>
-      <p><strong>Chief Operations Officer, Secretary, Treasurer, & Chair of the Board</strong></p>
+      <p><strong>Chief Operating Officer, Secretary, Treasurer, & Chair of the Board</strong></p>
       <p>Arthur Zey brings to OLI a broad background in law, technology, nonprofit operations, product leadership, and Objectivist intellectual advocacy. His work has consistently centered on integrating complex ideas into practical systems: clarifying goals, organizing teams, improving processes, building tools, and helping principled ideas become usable in the real world.</p>
       <p>Arthur holds a JD from UCLA School of Law and is admitted to the California Bar. He also holds a BS in Mathematics of Computation from UCLA, where he graduated summa cum laude, and completed the Objectivist Academic Center. His legal education, mathematical training, and philosophical background inform his approach to objective law, institutional design, public advocacy, and the disciplined communication of abstract principles.</p>
       <p>As an undergraduate and law student, Arthur founded and served as Executive Director of LOGIC, a 501(c)(3) Objectivist student organization at UCLA. Over nearly seven years, he managed the organization's finances, officers, volunteers, programming, website, and administrative tools; organized approximately forty speaking events and conferences; led weekly student discussions; and helped create a campus forum for the serious study and public discussion of philosophy, politics, culture, and individual rights.</p>
