@@ -1,9 +1,8 @@
 ---
 title: "About"
 date: "2026-06-10"
-last_modified_at: "2026-07-06"
-excerpt: "About OLI's mission, first principles, method, philosophical orientation, activities, team, and contribution posture."
-tagline: "Fighting to secure individual rights against arbitrary government power through a constitutional framework grounded in rational principles of rights and limited government."
+last_modified_at: "2026-07-07"
+excerpt: "Fighting to secure individual rights against arbitrary government power through a constitutional framework grounded in rational principles of rights and limited government."
 classes: wide
 toc_widget:
   enabled: true

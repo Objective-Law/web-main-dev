@@ -1,9 +1,8 @@
 ---
 title: "Resources"
 date: "2026-06-10"
-last_modified_at: "2026-07-05"
-excerpt: "A developing library for OLI articles, briefs, videos, and educational materials on objective law, individual rights, and limited government."
-tagline: "A developing library for objective law, constitutional principle, individual rights, and limited government."
+last_modified_at: "2026-07-07"
+excerpt: "A developing library for articles, briefs, videos, and educational materials on objective law, individual rights, and limited government."
 classes: wide
 header:
   # kicker: "Resource Library"

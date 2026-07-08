@@ -1,7 +1,0 @@
-tax_status:
-  short: "501(c)(3) recognition pending"
-  notice: "OLI has applied for recognition of exemption under Section 501(c)(3), and IRS recognition is pending. <a href=\"/contribute/\">Donations</a> are expected to be deductible retroactive to formation if recognition is granted, but donors should consult their tax advisors."
-donation:
-  platform_status: "Donation platform coming soon"
-  contact_email: "info@objectivelaw.org"
-  platform_candidate: "Zeffy"
