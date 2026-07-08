@@ -4,7 +4,7 @@
 title: "The Objective Law Initiative"
 title_separator: "|"
 description: "The Objective Law Initiative fights to secure individual rights against arbitrary power by developing and applying a constitutional framework grounded in rational principles of rights and limited government."
-url: "https://objectivelaw.org"
+url: "https://dev.objectivelaw.org"
 baseurl: ""
 repository: "objective-law/web-main"
 timezone: "America/Denver"

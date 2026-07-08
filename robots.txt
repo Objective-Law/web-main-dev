@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://objectivelaw.org/sitemap.xml
+Sitemap: https://dev.objectivelaw.org/sitemap.xml
